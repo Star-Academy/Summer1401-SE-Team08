@@ -1,13 +1,14 @@
 import opennlp.tools.stemmer.PorterStemmer;
 
 import java.util.HashMap;
+import java.util.TreeSet;
 
 public class InvertedIndex {
 
     private static InvertedIndex instance;
     private final PorterStemmer porterStemmer;
     private final FileReader fileReader;
-    private final HashMap<String, Word> database;
+    private final HashMap<String, TreeSet<String>> database;
 
     public InvertedIndex() {
         porterStemmer = new PorterStemmer();
@@ -19,38 +20,39 @@ public class InvertedIndex {
         if (instance == null)
             instance = new InvertedIndex();
         return instance;
-
     }
-
 
     public void initialize() {
         HashMap<String, String> docs = fileReader.getDocs();
         for (String doc : docs.keySet()) {
-            addToDatabase(doc, docs.get(doc));
+            String[] tokens = tokenize(docs.get(doc));
+            addToDatabase(doc, tokens);
         }
         System.out.println();
     }
 
-    private void addToDatabase(final String docName, final String content) {
-        String[] split = content.split("[\\W]+");
-        for (final String word : split) {
+    public String[] tokenize(String contents){
+        contents = contents.replaceAll("[^\\w\\s]", " ");
+        contents = contents.toUpperCase();
+        return contents.split("[\\s]+");
+    }
+
+    private void addToDatabase(final String docName, final String[] tokens) {
+        for (final String word : tokens) {
             String stemWord = porterStemmer.stem(word);
             if (database.containsKey(stemWord)) {
-                Word currentWord = database.get(stemWord);
-                if (!currentWord.hasParentDoc(docName)) {
-                    currentWord.addDoc(docName);
-                }
+                database.get(stemWord).add(docName);
             } else {
-                Word newWord = new Word(word);
-                newWord.addDoc(docName);
-                database.put(stemWord, newWord);
+                TreeSet<String> docs = new TreeSet<>();
+                docs.add(docName);
+                database.put(stemWord, docs);
             }
         }
     }
 
 
-    public Word query(String word) {
-        return database.get(word) != null ? database.get(word) : new Word("empty");
+    public TreeSet<String> query(String word) {
+        return database.get(word) != null ? database.get(word) : new TreeSet<>();
     }
 
 

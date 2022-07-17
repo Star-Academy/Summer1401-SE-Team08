@@ -3,6 +3,7 @@ import opennlp.tools.stemmer.PorterStemmer;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class Main {
 
@@ -22,11 +23,13 @@ public class Main {
         }
 
         System.out.println("Enter your sentence to search!");
-        String search = scanner.nextLine().toLowerCase();
-        String[] split = search.split("\\s");
-
-        for(final String word : split) {
-            System.out.println(sE.query(porterStemmer.stem(word)).toString());
-        }
+        String search = scanner.nextLine();
+        // String[] split = search.split("\\s+");
+        QueryHandler q = new QueryHandler(search);
+        TreeSet<String> out = q.handleQuery(sE);
+        System.out.println(out.toString());
+        // for(final String word : split) {
+        //     System.out.println(sE.query(porterStemmer.stem(word)).toString());
+        // }
     }
 }
