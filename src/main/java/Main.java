@@ -1,7 +1,6 @@
 import opennlp.tools.stemmer.PorterStemmer;
 
 import java.io.FileNotFoundException;
-import java.nio.file.NoSuchFileException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -12,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        SearchEngine sE = SearchEngine.getInstance();
+        InvertedIndex sE = InvertedIndex.getInstance();
         FileReader fR = FileReader.getInstance();
         PorterStemmer porterStemmer = new PorterStemmer();
         try {

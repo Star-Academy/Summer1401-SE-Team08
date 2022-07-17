@@ -1,25 +1,23 @@
 import opennlp.tools.stemmer.PorterStemmer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class SearchEngine {
+public class InvertedIndex {
 
-    private static SearchEngine instance;
+    private static InvertedIndex instance;
     private final PorterStemmer porterStemmer;
     private final FileReader fileReader;
     private final HashMap<String, Word> database;
 
-    public SearchEngine() {
+    public InvertedIndex() {
         porterStemmer = new PorterStemmer();
         fileReader = FileReader.getInstance();
         database = new HashMap<>();
     }
 
-    public static SearchEngine getInstance() {
+    public static InvertedIndex getInstance() {
         if (instance == null)
-            instance = new SearchEngine();
+            instance = new InvertedIndex();
         return instance;
 
     }
