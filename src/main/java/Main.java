@@ -1,35 +1,24 @@
-import opennlp.tools.stemmer.PorterStemmer;
-
-import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.TreeSet;
+import java.io.File;
+import java.util.HashSet;
 
 public class Main {
-
-    public static String text = "Marie was born in Paris.";
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
-        InvertedIndex sE = InvertedIndex.getInstance();
-        FileReader fR = FileReader.getInstance();
-        PorterStemmer porterStemmer = new PorterStemmer();
-        try {
-            fR.scanDocs();
-            sE.initialize();
-        } catch (FileNotFoundException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
-        }
-
         System.out.println("Enter your sentence to search!");
-        String search = scanner.nextLine();
-        // String[] split = search.split("\\s+");
-        QueryHandler q = new QueryHandler(search);
-        TreeSet<String> out = q.handleQuery(sE);
+        String query = scanner.nextLine();
+        scanner.close();
+        InvertedIndex index = InvertedIndex.getInstance();
+        try {
+            index.addFolderToDatabase(new File(".\\EnglishData"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        long startTime = System.nanoTime();
+        QueryHandler handler = new QueryHandler(query, index);
+        HashSet<String> out = handler.handleQuery();
+        long endTime = System.nanoTime();
         System.out.println(out.toString());
-        // for(final String word : split) {
-        //     System.out.println(sE.query(porterStemmer.stem(word)).toString());
-        // }
+        System.out.println((endTime-startTime)/1e9);
     }
 }

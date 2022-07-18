@@ -1,20 +1,33 @@
 import java.util.ArrayList;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 public class QueryHandler {
+    private String query;
+    private InvertedIndex index;
     private ArrayList<String> andWords;
     private ArrayList<String> orWords;
     private ArrayList<String> notWords;
 
-    public QueryHandler(String query){
+    public QueryHandler(String query, InvertedIndex index){
+        this.query = query;
+        this.index = index;
+        setLists();
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+        setLists();
+    }
+
+    public void setIndex(InvertedIndex index) {
+        this.index = index;
+    }
+
+    public void setLists(){
         andWords = new ArrayList<>();
         orWords = new ArrayList<>();
         notWords = new ArrayList<>();
-        setQuery(query);
-    }
-
-    public void setQuery(String query){
-        String[] tokens = tokenize(query);
+        String[] tokens = Tokenizer.tokenize(query, TokenizerMode.QUERY);
         for(String token : tokens){
             if(token.startsWith("+"))
                 orWords.add(token.replaceAll("\\+", ""));
@@ -25,39 +38,36 @@ public class QueryHandler {
         }
     }
 
-    public TreeSet<String> handleQuery(InvertedIndex index){
-        TreeSet<String> answer = new TreeSet<>();
-        answer = index.query(orWords.get(0));
-        answer = handleOrWords(answer, index);
-        answer = handleNotWords(answer, index);
-        answer = handleAndWords(answer, index);
+    public HashSet<String> handleQuery(){
+        HashSet<String> answer = new HashSet<>();
+        answer.addAll(index.getDocIdToContents().keySet());
+        answer = handleAndWrods(answer);
+        if(!orWords.isEmpty())
+            answer = handleOrWords(answer);
+        answer = handleNotWords(answer);
         return answer;
     }
 
-    public TreeSet<String> handleAndWords(TreeSet<String> set, InvertedIndex index){
+    public HashSet<String> handleAndWrods(HashSet<String> set){
         for(String andWord : andWords){
-            set.retainAll(index.query(andWord));
+            set.retainAll(index.search(andWord));
         }
         return set;
     }
 
-    public TreeSet<String> handleOrWords(TreeSet<String> set, InvertedIndex index){
+    public HashSet<String> handleOrWords(HashSet<String> set){
+        HashSet<String> temp = new HashSet<>();
         for(String orWord : orWords){
-            set.addAll(index.query(orWord));
+            temp.addAll(index.search(orWord));
         }
+        set.retainAll(temp);
         return set;
     }
 
-    public TreeSet<String> handleNotWords(TreeSet<String> set, InvertedIndex index){
+    public HashSet<String> handleNotWords(HashSet<String> set){
         for(String notWord : notWords){
-            set.removeAll(index.query(notWord));
+            set.removeAll(index.search(notWord));
         }
         return set;
-    }
-    
-    public String[] tokenize(String contents){
-        contents = contents.replaceAll("[^+\\-\\w\\s]", " ");
-        contents = contents.toUpperCase();
-        return contents.split("[\\s]+");
     }
 }

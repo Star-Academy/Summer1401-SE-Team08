@@ -1,19 +1,20 @@
 import opennlp.tools.stemmer.PorterStemmer;
 
+import java.io.File;
+import java.util.Map;
 import java.util.HashMap;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 public class InvertedIndex {
-
     private static InvertedIndex instance;
     private final PorterStemmer porterStemmer;
-    private final FileReader fileReader;
-    private final HashMap<String, TreeSet<String>> database;
+    private HashMap<String, String> docIdToContents;
+    private HashMap<String, HashSet<String>> wordToDocId;
 
     public InvertedIndex() {
         porterStemmer = new PorterStemmer();
-        fileReader = FileReader.getInstance();
-        database = new HashMap<>();
+        docIdToContents = new HashMap<>();
+        wordToDocId = new HashMap<>();
     }
 
     public static InvertedIndex getInstance() {
@@ -22,38 +23,41 @@ public class InvertedIndex {
         return instance;
     }
 
-    public void initialize() {
-        HashMap<String, String> docs = fileReader.getDocs();
-        for (String doc : docs.keySet()) {
-            String[] tokens = tokenize(docs.get(doc));
-            addToDatabase(doc, tokens);
-        }
-        System.out.println();
+    public HashMap<String, String> getDocIdToContents() {
+        return docIdToContents;
     }
 
-    public String[] tokenize(String contents){
-        contents = contents.replaceAll("[^\\w\\s]", " ");
-        contents = contents.toUpperCase();
-        return contents.split("[\\s]+");
+    public HashMap<String, HashSet<String>> getWordToDocId() {
+        return wordToDocId;
     }
 
-    private void addToDatabase(final String docName, final String[] tokens) {
-        for (final String word : tokens) {
-            String stemWord = porterStemmer.stem(word);
-            if (database.containsKey(stemWord)) {
-                database.get(stemWord).add(docName);
-            } else {
-                TreeSet<String> docs = new TreeSet<>();
-                docs.add(docName);
-                database.put(stemWord, docs);
-            }
+    public void addFileToDatabase(File file) throws Exception{
+        String docId = file.getName();
+        String contents = FileReader.readFile(file);
+        docIdToContents.put(docId, contents);
+        updateWordToDocID(docId, Tokenizer.tokenize(contents, TokenizerMode.TEXT));
+    }
+
+    public void addFolderToDatabase(File folder) throws Exception{
+        HashMap<String, String> map = FileReader.readFolder(folder);
+        docIdToContents.putAll(map);
+        for(Map.Entry<String,String> entry : map.entrySet()){
+            updateWordToDocID(entry.getKey(), Tokenizer.tokenize(entry.getValue(), TokenizerMode.TEXT));
         }
     }
 
-
-    public TreeSet<String> query(String word) {
-        return database.get(word) != null ? database.get(word) : new TreeSet<>();
+    private void updateWordToDocID(String docID, String[] tokens){
+        for (final String token : tokens) {
+            String word = porterStemmer.stem(token);
+            if(!wordToDocId.containsKey(word)){
+                HashSet<String> docIds = new HashSet<>();
+                wordToDocId.put(word, docIds);
+            } 
+            wordToDocId.get(word).add(docID);
+        }
     }
 
-
+    public HashSet<String> search(String word) {
+        return wordToDocId.get(word) != null ? wordToDocId.get(word) : new HashSet<>();
+    }
 }
