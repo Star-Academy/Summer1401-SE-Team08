@@ -1,9 +1,11 @@
+import java.util.Iterator;
 import java.util.Scanner;
 import java.io.File;
 import java.util.HashSet;
+import java.math.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your sentence to search!");
         String query = scanner.nextLine();
@@ -18,7 +20,10 @@ public class Main {
         QueryHandler handler = new QueryHandler(query, index);
         HashSet<String> out = handler.handleQuery();
         long endTime = System.nanoTime();
-        System.out.println(out.toString());
-        System.out.println((endTime-startTime)/1e9);
+
+        System.out.println("About " + out.size() + " results (" + (endTime-startTime)/1e9+ " seconds)");
+        for (String s : out) {
+            System.out.println("Document name : " + s);
+        }
     }
 }
