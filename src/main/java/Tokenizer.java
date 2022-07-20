@@ -1,13 +1,34 @@
+import java.util.List;
+import java.util.Arrays;
+
 public class Tokenizer {
+    private TokenizerMode mode;
+
     public static final String queryRegex = "[^+\\-\\w\\s]";
     public static final String textRegex = "[^\\w\\s]";
 
-    public static String[] tokenize(String contents, TokenizerMode mode){
-        String regex = textRegex;
-        if(mode == TokenizerMode.QUERY)
-            regex = queryRegex;
-        contents = contents.replaceAll(regex, " ");
+    public Tokenizer(TokenizerMode mode){
+        setMode(mode);
+    }
+
+    public void setMode(TokenizerMode mode) {
+        this.mode = mode;
+    }
+
+    public String getRegex() {
+        switch (mode) {
+            case TEXT:
+                return textRegex;
+            case QUERY:
+                return queryRegex;
+            default:
+                return textRegex;
+        }
+    }
+
+    public List<String> tokenize(String contents){
+        contents = contents.replaceAll(getRegex(), " ");
         contents = contents.toUpperCase();
-        return contents.split("[\\s]+");
+        return Arrays.asList(contents.split("[\\s]+"));
     }
 }

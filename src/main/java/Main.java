@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,15 +10,22 @@ public class Main {
         System.out.println("Enter your sentence to search!");
         String query = scanner.nextLine();
         scanner.close();
-        InvertedIndex index = InvertedIndex.getInstance();
+        InvertedIndex index = new InvertedIndex();
+        Tokenizer textTokenizer = new Tokenizer(TokenizerMode.TEXT);
         try {
-            index.addFolderToDatabase(new File(".\\EnglishData"));
+            HashMap<String, String> docs = FileReader.readFolder(new File(".\\EnglishData"));
+            HashMap<String, List<String>> tokenizedDocs = new HashMap<>();
+            for (String key : docs.keySet()){
+                tokenizedDocs.put(key, Stemmer.instance.stemList(textTokenizer.tokenize(docs.get(key))));
+            }
+            index.addToInvertedIndex(tokenizedDocs);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        QueryHandler handler = new QueryHandler(index);
+        Tokenizer queryTokenizer = new Tokenizer(TokenizerMode.QUERY);
         long startTime = System.nanoTime();
-        QueryHandler handler = new QueryHandler(query, index);
-        HashSet<String> out = handler.handleQuery();
+        HashSet<String> out = handler.handleQuery(new Query(queryTokenizer.tokenize(query)));
         long endTime = System.nanoTime();
         System.out.println(out.toString());
         System.out.println((endTime-startTime)/1e9);

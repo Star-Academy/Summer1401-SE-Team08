@@ -1,6 +1,6 @@
 import java.io.File;
-import java.util.HashMap;
 import java.util.Scanner;
+import java.util.HashMap;
 
 public final class FileReader {
     public static String readFile(File file) throws Exception{
