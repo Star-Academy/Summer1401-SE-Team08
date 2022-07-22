@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class InvertedIndex {
-    private HashMap<String, List<String>> docIdToContents;
-    private HashMap<String, Set<String>> wordToDocId;
+    private final HashMap<String, List<String>> docIdToContents;
+    private final HashMap<String, Set<String>> wordToDocId;
 
     public InvertedIndex() {
         docIdToContents = new HashMap<>();
@@ -17,9 +17,6 @@ public class InvertedIndex {
         return docIdToContents;
     }
 
-    public HashMap<String, Set<String>> getWordToDocId() {
-        return wordToDocId;
-    }
 
     public void addToInvertedIndex(HashMap<String,List<String>> newDocs){
         docIdToContents.putAll(newDocs);
@@ -31,7 +28,7 @@ public class InvertedIndex {
     private void addToWordToDocID(String docId, List<String> words){
         for (String word : words) {
             if(!wordToDocId.containsKey(word)){ 
-                wordToDocId.put(word, new HashSet<String>());
+                wordToDocId.put(word, new HashSet<>());
             } 
             wordToDocId.get(word).add(docId);
         }

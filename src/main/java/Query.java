@@ -2,9 +2,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Query {
-    private List<String> andWords;
-    private List<String> orWords;
-    private List<String> notWords;
+    private final List<String> andWords;
+    private final List<String> orWords;
+    private final List<String> notWords;
 
     public Query(List<String> query){
         andWords = new ArrayList<>();
@@ -12,16 +12,11 @@ public class Query {
         notWords = new ArrayList<>();
         for(String token : query){
             switch (TokenType.getTokenType(token)) {
-                case AND:
-                    andWords.add(token);
-                    break;
-                case OR:
-                    orWords.add(token.substring(1));
-                    break;
-                case NOT:
-                    notWords.add(token.substring(1));
-                    break;
-                default:
+                case AND -> andWords.add(token);
+                case OR -> orWords.add(token.substring(1));
+                case NOT -> notWords.add(token.substring(1));
+                default -> {
+                }
             }
         }
     }

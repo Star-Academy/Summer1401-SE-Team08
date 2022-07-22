@@ -1,11 +1,10 @@
-import java.util.ArrayList;
 import java.util.List;
-//import java.util.stream.Collectors;
+import java.util.stream.Collectors;
 
 import opennlp.tools.stemmer.PorterStemmer;
 
 public class Stemmer{
-    private PorterStemmer porterStemmer;
+    private final PorterStemmer porterStemmer;
     public static Stemmer instance;
 
     static {
@@ -17,15 +16,9 @@ public class Stemmer{
     }
 
     public List<String> stemList(List<String> tokens){
-        List<String> stemmedWords = new ArrayList<>();
-        for(String token : tokens){
-            String stemmedWord = porterStemmer.stem(token);
-            stemmedWords.add(stemmedWord);
-        }
-        return stemmedWords;
 
-        // return tokens.stream()
-        //     .map(token -> porterStemmer.stem(token))
-        //     .collect(Collectors.toList());
+         return tokens.stream()
+             .map(porterStemmer::stem)
+             .collect(Collectors.toList());
     }
 }

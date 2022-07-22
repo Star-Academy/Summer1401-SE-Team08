@@ -16,14 +16,10 @@ public class Tokenizer {
     }
 
     public String getRegex() {
-        switch (mode) {
-            case TEXT:
-                return textRegex;
-            case QUERY:
-                return queryRegex;
-            default:
-                return textRegex;
+        if (mode == TokenizerMode.QUERY) {
+            return queryRegex;
         }
+        return textRegex;
     }
 
     public List<String> tokenize(String contents){
