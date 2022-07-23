@@ -11,7 +11,6 @@ public class Main {
         String query = scanner.nextLine();
         scanner.close();
         InvertedIndex index = new InvertedIndex();
-
         readFiles(index);
         handleQuery(index,query);
     }

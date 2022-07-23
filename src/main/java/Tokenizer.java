@@ -23,8 +23,7 @@ public class Tokenizer {
     }
 
     public List<String> tokenize(String contents){
-        contents = contents.replaceAll(getRegex(), " ");
-        contents = contents.toUpperCase();
+        contents = contents.replaceAll(getRegex()," ").toUpperCase();
         return Arrays.asList(contents.split("[\\s]+"));
     }
 }

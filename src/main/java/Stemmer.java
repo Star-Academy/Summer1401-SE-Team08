@@ -16,7 +16,6 @@ public class Stemmer{
     }
 
     public List<String> stemList(List<String> tokens){
-
          return tokens.stream()
              .map(porterStemmer::stem)
              .collect(Collectors.toList());
