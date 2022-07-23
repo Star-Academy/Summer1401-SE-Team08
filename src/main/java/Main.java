@@ -12,7 +12,7 @@ public class Main {
         scanner.close();
         InvertedIndex index = new InvertedIndex();
         readFiles(index);
-        handleQuery(index,query);
+        handleQuery(index, query);
     }
 
     private static void readFiles(InvertedIndex index) {
@@ -20,7 +20,7 @@ public class Main {
         try {
             HashMap<String, String> docs = FileReader.readFolder(new File(".\\EnglishData"));
             HashMap<String, List<String>> tokenizedDocs = new HashMap<>();
-            for (String key : docs.keySet()){
+            for (String key : docs.keySet()) {
                 tokenizedDocs.put(key, Stemmer.instance.stemList(textTokenizer.tokenize(docs.get(key))));
             }
             index.addToInvertedIndex(tokenizedDocs);
@@ -30,6 +30,7 @@ public class Main {
     }
 
     private static void handleQuery(InvertedIndex index, String query) {
+        // Main method responsible for handling the query and calculating the elapsed time.
         QueryHandler handler = new QueryHandler(index);
         Tokenizer queryTokenizer = new Tokenizer(TokenizerMode.QUERY);
         long startTime = System.nanoTime();
@@ -39,6 +40,7 @@ public class Main {
     }
 
     private static void printResult(HashSet<String> out, TimeRange time) {
+        // Printing the results of a query with the time it took.
         System.out.println("About " + out.size() + " results " + time.toString());
         for (String s : out) {
             System.out.println("Document name : " + s);

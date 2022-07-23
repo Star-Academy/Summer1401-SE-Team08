@@ -6,11 +6,12 @@ public class Query {
     private final List<String> orWords;
     private final List<String> notWords;
 
-    public Query(List<String> query){
+    // Separating the words of the query.
+    public Query(List<String> query) {
         andWords = new ArrayList<>();
         orWords = new ArrayList<>();
         notWords = new ArrayList<>();
-        for(String token : query){
+        for (String token : query) {
             switch (TokenType.getTokenType(token)) {
                 case AND -> andWords.add(token);
                 case OR -> orWords.add(token.substring(1));
@@ -20,7 +21,7 @@ public class Query {
             }
         }
     }
-    
+
     public List<String> getAndWords() {
         return andWords;
     }

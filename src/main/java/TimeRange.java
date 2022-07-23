@@ -1,3 +1,5 @@
+
+// Parameter Object to avoid Long Parameter List.
 public class TimeRange {
     private final long start;
     private final long end;
@@ -13,6 +15,6 @@ public class TimeRange {
     }
 
     private double calculateTimeTaken() {
-        return (end - start)/1e9;
+        return (end - start) / 1e9;
     }
 }

@@ -4,11 +4,10 @@ public enum TokenType {
     NOT;
 
     public static TokenType getTokenType(String token) {
-        if (token.startsWith("+")){
-          return TokenType.OR;
-        }
-        else if (token.startsWith("-")){
-          return TokenType.NOT;
+        if (token.startsWith("+")) {
+            return TokenType.OR;
+        } else if (token.startsWith("-")) {
+            return TokenType.NOT;
         }
         return TokenType.AND;
     }

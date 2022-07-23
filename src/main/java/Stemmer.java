@@ -3,6 +3,7 @@ import java.util.stream.Collectors;
 
 import opennlp.tools.stemmer.PorterStemmer;
 
+// Class responsible for stemming query and doc words.
 public class Stemmer{
     private final PorterStemmer porterStemmer;
     public static Stemmer instance;
