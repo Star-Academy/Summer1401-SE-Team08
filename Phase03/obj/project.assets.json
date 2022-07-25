@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Khosro\\Desktop\\StarAcademy\\Summer1401-SE-Team08\\Phase03\\Phase03.csproj",
+      "projectUniqueName": "C:\\Users\\Khosro\\Desktop\\StarAcademy\\Summer1401-SE-Team08-main\\Phase03\\Phase03.csproj",
       "projectName": "Phase03",
-      "projectPath": "C:\\Users\\Khosro\\Desktop\\StarAcademy\\Summer1401-SE-Team08\\Phase03\\Phase03.csproj",
+      "projectPath": "C:\\Users\\Khosro\\Desktop\\StarAcademy\\Summer1401-SE-Team08-main\\Phase03\\Phase03.csproj",
       "packagesPath": "C:\\Users\\Khosro\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Khosro\\Desktop\\StarAcademy\\Summer1401-SE-Team08\\Phase03\\obj\\",
+      "outputPath": "C:\\Users\\Khosro\\Desktop\\StarAcademy\\Summer1401-SE-Team08-main\\Phase03\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Khosro\\AppData\\Roaming\\NuGet\\NuGet.Config"

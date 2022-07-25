@@ -18,10 +18,10 @@ public class Controller {
 		this.scores = new List<ScoreType>();
 	}
 
-	public List<string> Methoddawd(){
+	public List<string> GetTopStudents(int n){
 		return students.Select(x => new {
 				Average = scores.Where(y => y.StudentNumber == x.StudentNumber).Select(y => y.Score).Average(), St=x
-				}).OrderByDescending(x => x.Average).Take(3).Select(
+				}).OrderByDescending(x => x.Average).Take(n).Select(
 					x => "FirstName: " + x.St.FirstName + ", LastName: " + x.St.LastName + ", Average: " + x.Average).ToList();
 	}
 }

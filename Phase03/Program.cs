@@ -16,6 +16,6 @@ class Program {
     var controller = new Controller();
     controller.students = students;
     controller.scores = scores;
-    Console.WriteLine(string.Join('\n', controller.Methoddawd()));
+    Console.WriteLine(string.Join('\n', controller.GetTopStudents(3)));
   }
 }
