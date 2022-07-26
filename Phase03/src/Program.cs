@@ -15,6 +15,7 @@ class Program {
 		catch (Exception e)
 		{
 			Console.WriteLine(e.ToString());
+			return;
 		}
 		var manager = new StudentManager {Students = students, Grades = grades};
 		Console.WriteLine(string.Join('\n', manager.GetTopStudents(3)));
