@@ -1,8 +1,9 @@
 ﻿using StudentManagement;
 using System.Text.Json;
 class Program {
-	public static string StudentsFileAddress = "../Data/students.json";
-	public static string GradesFileAddress = "../Data/scores.json";
+	public const string StudentsFileAddress = "../Data/students.json";
+	public const string GradesFileAddress = "../Data/scores.json";
+	public const int NumberOfTopStudents = 3;
 	static void Main()
 	{	
 		List<Student> students = new List<Student>();
@@ -18,6 +19,6 @@ class Program {
 			return;
 		}
 		var manager = new StudentManager {Students = students, Grades = grades};
-		Console.WriteLine(string.Join('\n', manager.GetTopStudents(3)));
+		Console.WriteLine(string.Join('\n', manager.GetTopStudents(NumberOfTopStudents)));
 	}
 }
