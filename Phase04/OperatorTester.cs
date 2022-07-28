@@ -25,46 +25,36 @@ public class CalculatorTester
 
     [Theory]
     [InlineData(OperatorEnum.sum)]
-    public void SumEnumTet(OperatorEnum fParam) {
-        //act
-        var actual = this._provider.GetOperator(fParam);
-        //assert
+    public void SumEnumTet(OperatorEnum @enum) {
+        var actual = this._provider.GetOperator(@enum);
         Assert.IsType<SumOperator>(actual);
     }
 
     [Theory]
     [InlineData(OperatorEnum.sub)]
-    public void SubEnumTest(OperatorEnum fParam) {
-        //act
-        var actual = this._provider.GetOperator(fParam);
-        //assert
+    public void SubEnumTest(OperatorEnum @enum) {
+        var actual = this._provider.GetOperator(@enum);
         Assert.IsType<SubOperator>(actual);
     }
 
     [Theory]
     [InlineData(OperatorEnum.multiply)]
-    public void MultiplyEnumTest(OperatorEnum fParam) {
-        //act
-        var actual = this._provider.GetOperator(fParam);
-        //assert
+    public void MultiplyEnumTest(OperatorEnum @enum) {
+        var actual = this._provider.GetOperator(@enum);
         Assert.IsType<MultiplyOperator>(actual);
     }
 
     [Theory]
     [InlineData(OperatorEnum.division)]
-    public void DivideEnumTest(OperatorEnum fParam) {
-        //act
-        var actual = _provider.GetOperator(fParam);
-        //assert
+    public void DivideEnumTest(OperatorEnum @enum) {
+        var actual = _provider.GetOperator(@enum);
         Assert.IsType<DivisionOperator>(actual);
     }
 
     [Theory]
     [InlineData(null)]
-    public void NotSupportedExceptionTest(OperatorEnum fParam) {
-        //act
-        Action act = () => _provider.GetOperator(fParam);
-        //assert
+    public void NotSupportedExceptionTest(OperatorEnum @enum) {
+        Action act = () => _provider.GetOperator(@enum);
         Assert.Throws<NotSupportedException>(act);
     }
 
@@ -81,22 +71,18 @@ public class CalculatorTester
     [InlineData(10,-9,1)]
     [InlineData(-11,-12,-23)]
     [InlineData(-12,-11,-23)]
-    public void AdditionBaseTest(int fParam, int sParam, int expected)
+    public void AdditionBaseTest(int firstOperand, int secondOperand, int expected)
     {
-        //act
-        var actual = _sumOperator.Calculate(fParam, sParam);
-        //assert
+        var actual = _sumOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
     }
     
     [Theory]
     [InlineData(MaxInt, 1)]
     [InlineData(MinInt, -1)]
-    public void AdditionOverflowTest(int fParam, int sParam)
+    public void AdditionOverflowTest(int firstOperand, int secondOperand)
     {   
-        //act
-        Action act = () => this._sumOperator.Calculate(fParam, sParam);
-        //assert
+        Action act = () => this._sumOperator.Calculate(firstOperand, secondOperand);
         Assert.Throws<Exception>(act);
     }
 
@@ -113,22 +99,18 @@ public class CalculatorTester
     [InlineData(10,-9,19)]
     [InlineData(-11,-12,1)]
     [InlineData(-12,-11,-1)]
-    public void SubtractionBaseTest(int fParam, int sParam, int expected)
+    public void SubtractionBaseTest(int firstOperand, int secondOperand, int expected)
     {
-        //act
-        var actual = _subOperator.Calculate(fParam, sParam);
-        //assert
+        var actual = _subOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
     }
     
     [Theory]
     [InlineData(MaxInt, -1)]
     [InlineData(MinInt, 1)]
-    public void SubtractionOverflowTest(int fParam, int sParam)
+    public void SubtractionOverflowTest(int firstOperand, int secondOperand)
     {   
-        //act
-        Action act = () => this._subOperator.Calculate(fParam, sParam);
-        //assert
+        Action act = () => this._subOperator.Calculate(firstOperand, secondOperand);
         Assert.Throws<Exception>(act);
     }
 
@@ -145,10 +127,8 @@ public class CalculatorTester
     [InlineData(10,-9,-90)]
     [InlineData(-11,-12,132)]
     [InlineData(-12,-11,132)]
-    public void MultiplicationBaseTest(int fParam, int sParam, int expected) {
-        //act
-        int actual = this._multiplyOperator.Calculate(fParam, sParam);
-        //assert
+    public void MultiplicationBaseTest(int firstOperand, int secondOperand, int expected) {
+        int actual = this._multiplyOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
     }
 
@@ -157,10 +137,8 @@ public class CalculatorTester
     [InlineData(MaxInt,-2)]
     [InlineData(MinInt,2)]
     [InlineData(MinInt,-2)]
-    public void MultiplicationOverflowTest(int fParam, int sParam) {
-        //act
-        Action act = () => this._multiplyOperator.Calculate(fParam, sParam);
-        //assert
+    public void MultiplicationOverflowTest(int firstOperand, int secondOperand) {
+        Action act = () => this._multiplyOperator.Calculate(firstOperand, secondOperand);
         Assert.Throws<Exception>(act);
     }
 
@@ -175,20 +153,16 @@ public class CalculatorTester
     [InlineData(10,-9,-1)]
     [InlineData(-11,-12,0)]
     [InlineData(-12,-11,1)]
-    public void DivisionBaseTest(int fParam, int sParam, int expected) {
-        //act
-        int actual = this._divisionOperator.Calculate(fParam, sParam);
-        //assert
+    public void DivisionBaseTest(int firstOperand, int secondOperand, int expected) {
+        int actual = this._divisionOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
     }
     
     [Theory]
     [InlineData(MaxInt,0)]
     [InlineData(MinInt,0)]
-    public void DivisionByZeroTest(int fParam, int sParam) {
-        //act
-        Action act = () => this._divisionOperator.Calculate(fParam, sParam);
-        //assert
+    public void DivisionByZeroTest(int firstOperand, int secondOperand) {
+        Action act = () => this._divisionOperator.Calculate(firstOperand, secondOperand);
         Assert.Throws<DivideByZeroException>(act);
     }
 }
