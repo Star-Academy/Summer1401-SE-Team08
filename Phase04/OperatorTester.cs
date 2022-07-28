@@ -3,7 +3,7 @@ using SimpleCalculator.Business.Enums;
 using SimpleCalculator.Business.Abstraction;
 using SimpleCalculator.Business.OperatorBusiness;
 using SimpleCalculator.Business.OperatorBusiness.Operators;
-public class CalculatorTester
+public class OperatorTester
 {
     private const int MaxInt = 2147483647;
     private const int MinInt = -2147483648;
@@ -13,7 +13,7 @@ public class CalculatorTester
     private readonly SubOperator _subOperator;
     private readonly MultiplyOperator _multiplyOperator;
     private readonly DivisionOperator _divisionOperator;
-    public CalculatorTester() {
+    public OperatorTester() {
         this._calculator = new Calculator();
         this._provider = new OperatorProvider();
         this._sumOperator = new SumOperator();
@@ -51,13 +51,6 @@ public class CalculatorTester
     }
 
     [Theory]
-    [InlineData(null)]
-    public void NotSupportedExceptionTest(OperatorEnum @enum) {
-        Action act = () => _provider.GetOperator(@enum);
-        Assert.Throws<NotSupportedException>(act);
-    }
-
-    [Theory]
     [InlineData(0,1,1)]
     [InlineData(2,0,2)]
     [InlineData(-3,0,-3)]
@@ -74,15 +67,6 @@ public class CalculatorTester
     {
         var actual = _sumOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
-    }
-    
-    [Theory]
-    [InlineData(MaxInt, 1)]
-    [InlineData(MinInt, -1)]
-    public void AdditionOverflowTest(int firstOperand, int secondOperand)
-    {   
-        Action act = () => this._sumOperator.Calculate(firstOperand, secondOperand);
-        Assert.Throws<Exception>(act);
     }
 
     [Theory]
@@ -103,15 +87,6 @@ public class CalculatorTester
         var actual = _subOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
     }
-    
-    [Theory]
-    [InlineData(MaxInt, -1)]
-    [InlineData(MinInt, 1)]
-    public void SubtractionOverflowTest(int firstOperand, int secondOperand)
-    {   
-        Action act = () => this._subOperator.Calculate(firstOperand, secondOperand);
-        Assert.Throws<Exception>(act);
-    }
 
     [Theory]
     [InlineData(0,1,0)]
@@ -131,15 +106,6 @@ public class CalculatorTester
         Assert.Equal(actual, expected);
     }
 
-    [Theory]
-    [InlineData(MaxInt,2)]
-    [InlineData(MaxInt,-2)]
-    [InlineData(MinInt,2)]
-    [InlineData(MinInt,-2)]
-    public void MultiplicationOverflowTest(int firstOperand, int secondOperand) {
-        Action act = () => this._multiplyOperator.Calculate(firstOperand, secondOperand);
-        Assert.Throws<Exception>(act);
-    }
 
     [Theory]
     [InlineData(0,1,0)]
@@ -156,66 +122,5 @@ public class CalculatorTester
         int actual = this._divisionOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
     }
-    
-    [Theory]
-    [InlineData(MaxInt,0)]
-    [InlineData(MinInt,0)]
-    public void DivisionByZeroTest(int firstOperand, int secondOperand) {
-        Action act = () => this._divisionOperator.Calculate(firstOperand, secondOperand);
-        Assert.Throws<DivideByZeroException>(act);
-    }
-
-    [Theory]
-    [InlineData(0,1,1)]
-    [InlineData(2,0,2)]
-    [InlineData(-3,0,-3)]
-    public void CalculatorAdditionTest(int firstOperand, int secondOperand, int expected) {
-        var provider_sub = new Mock<IOperatorProvider>();
-        provider_sub.Setup(x => x.GetOperator(OperatorEnum.sum)).Returns(new SumOperator());
-        Calculator calculator = new Calculator(provider_sub.Object);
-        int actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.sum);
-        Assert.Equal(actual, expected);
-    }
-
-    [Theory]
-    [InlineData(0,1,-1)]
-    [InlineData(2,0,2)]
-    [InlineData(-3,0,-3)]
-    public void CalculatorSubTest(int firstOperand, int secondOperand, int expected) {
-        var provider_sub = new Mock<IOperatorProvider>();
-        provider_sub.Setup(x => x.GetOperator(OperatorEnum.sub)).Returns(new SubOperator());
-        Calculator calculator = new Calculator(provider_sub.Object);
-        int actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.sub);
-        Assert.Equal(actual, expected);
-    }
-
-
-    [Theory]
-    [InlineData(5,6,30)]
-    [InlineData(6,5,30)]
-    [InlineData(7,-8,-56)]
-    public void CalculatorMultiplicationTest(int firstOperand, int secondOperand, int expected) {
-        var provider_sub = new Mock<IOperatorProvider>();
-        provider_sub.Setup(x => x.GetOperator(OperatorEnum.multiply)).Returns(new MultiplyOperator());
-        Calculator calculator = new Calculator(provider_sub.Object);
-        int actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.multiply);
-        Assert.Equal(actual, expected);
-    }
-
-    [Theory]
-    [InlineData(-8,7,-1)]
-    [InlineData(-9,10,0)]
-    [InlineData(10,-9,-1)]
-    public void CalculatorDivisionTest(int firstOperand, int secondOperand, int expected) {
-        var provider_sub = new Mock<IOperatorProvider>();
-        provider_sub.Setup(x => x.GetOperator(OperatorEnum.division)).Returns(new DivisionOperator());
-        Calculator calculator = new Calculator(provider_sub.Object);
-        int actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.division);
-        Assert.Equal(actual, expected);
-    }
-
-
-
-
     
 }
