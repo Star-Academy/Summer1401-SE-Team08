@@ -30,8 +30,8 @@ public class CalculatorTester
     public void CalculatorAdditionTest(int firstOperand, int secondOperand, int expected) {
         var provider_sub = new Mock<IOperatorProvider>();
         provider_sub.Setup(x => x.GetOperator(OperatorEnum.sum)).Returns(new SumOperator());
-        Calculator calculator = new Calculator(provider_sub.Object);
-        int actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.sum);
+        var calculator = new Calculator(provider_sub.Object);
+        var actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.sum);
         Assert.Equal(actual, expected);
     }
 
@@ -42,8 +42,8 @@ public class CalculatorTester
     public void CalculatorSubTest(int firstOperand, int secondOperand, int expected) {
         var provider_sub = new Mock<IOperatorProvider>();
         provider_sub.Setup(x => x.GetOperator(OperatorEnum.sub)).Returns(new SubOperator());
-        Calculator calculator = new Calculator(provider_sub.Object);
-        int actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.sub);
+        var calculator = new Calculator(provider_sub.Object);
+        var actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.sub);
         Assert.Equal(actual, expected);
     }
 
@@ -55,8 +55,8 @@ public class CalculatorTester
     public void CalculatorMultiplicationTest(int firstOperand, int secondOperand, int expected) {
         var provider_sub = new Mock<IOperatorProvider>();
         provider_sub.Setup(x => x.GetOperator(OperatorEnum.multiply)).Returns(new MultiplyOperator());
-        Calculator calculator = new Calculator(provider_sub.Object);
-        int actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.multiply);
+        var calculator = new Calculator(provider_sub.Object);
+        var actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.multiply);
         Assert.Equal(actual, expected);
     }
 
@@ -67,8 +67,8 @@ public class CalculatorTester
     public void CalculatorDivisionTest(int firstOperand, int secondOperand, int expected) {
         var provider_sub = new Mock<IOperatorProvider>();
         provider_sub.Setup(x => x.GetOperator(OperatorEnum.division)).Returns(new DivisionOperator());
-        Calculator calculator = new Calculator(provider_sub.Object);
-        int actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.division);
+        var calculator = new Calculator(provider_sub.Object);
+        var actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.division);
         Assert.Equal(actual, expected);
     }
 }

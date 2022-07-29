@@ -102,7 +102,7 @@ public class OperatorTester
     [InlineData(-11,-12,132)]
     [InlineData(-12,-11,132)]
     public void MultiplicationBaseTest(int firstOperand, int secondOperand, int expected) {
-        int actual = this._multiplyOperator.Calculate(firstOperand, secondOperand);
+        var actual = this._multiplyOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
     }
 
@@ -119,7 +119,7 @@ public class OperatorTester
     [InlineData(-11,-12,0)]
     [InlineData(-12,-11,1)]
     public void DivisionBaseTest(int firstOperand, int secondOperand, int expected) {
-        int actual = this._divisionOperator.Calculate(firstOperand, secondOperand);
+        var actual = this._divisionOperator.Calculate(firstOperand, secondOperand);
         Assert.Equal(actual, expected);
     }
     
