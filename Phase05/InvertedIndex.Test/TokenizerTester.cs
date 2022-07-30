@@ -1,22 +1,34 @@
+using InvertedIndex;
+
 namespace InvertedIndex.Test;
 
 public class TokenizerTester
 {   
-    [Theory]
-    public void QueryTokenizerTest(string contents, List<string> expected)
+    [Fact]
+    public void QueryTokenizerTest()
     {
+        IEnumerable<string> expected = new List<string>()
+        {
+            "HELLO",
+            "MONO",
+            "WO123123RLD"
+        };
         ITokenizer tokenizer = new Tokenizer(TokenizerMode.Query);
-        var actual = tokenizer.Tokenize(contents);
-        //actual.Should().
+        IEnumerable<string> actual = tokenizer.Tokenize("Hello Mono Wo123123rld%%%");
+        Assert.Equal(expected, actual);
     }
 
-
-
-    [Theory]
-    public void TextTokenizerTest(string contents, string expected) {
-        ITokenizer tokenizer = new Tokenizer(TokenizerMode.Query);
-        var actual = tokenizer.Tokenize(contents);
-        Assert.equal(actual,expected);
+    [Fact]
+    public void TextTokenizerTest() {
+        IEnumerable<string> expected = new List<string>()
+        {
+            "HELLO",
+            "MONO",
+            "WO123123RLD"
+        };
+        ITokenizer tokenizer = new Tokenizer(TokenizerMode.Text);
+        IEnumerable<string> actual = tokenizer.Tokenize("+Hello -Mono Wo123123rld%%%");
+        Assert.Equal(expected, actual);
     }
 
 }
