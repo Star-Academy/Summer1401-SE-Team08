@@ -3,14 +3,13 @@
 namespace InvertedIndex;
 public class Program
 {
-    public static void Main(string[] args)
+    public static HashSet<string> Main(string[] args)
     {
         Console.WriteLine("Enter your sentence to search!");
         var query = Console.ReadLine();
         SearchEngine engine = new SearchEngine();
         ReadFiles(engine);
-        HandleQuery(engine, query);
-        return;
+        return HandleQuery(engine, query);
     }
 
     private static void ReadFiles(SearchEngine engine)
@@ -19,7 +18,8 @@ public class Program
         try
         {
             var fileReader = new FileReader();
-            var docs = fileReader.ReadFolder("C:/Users/Khosro/Desktop/heheh/EnglishData");
+            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\EnglishData";
+            var docs = fileReader.ReadFolder(path);
             var tokenizedDocs = new Dictionary<string, List<string>>();
             foreach (var key in docs.Keys)
             {
@@ -34,12 +34,12 @@ public class Program
         }
     }
 
-    private static void HandleQuery(SearchEngine engine, string query)
+    private static HashSet<string> HandleQuery(SearchEngine engine, string query)
     {
         var handler = new QueryHandler(engine);
         var queryTokenizer = new Tokenizer(TokenizerMode.Query);
         HashSet<string> @out = handler.HandleQuery(new Query(queryTokenizer.Tokenize(query)));
-        PrintResult(@out);
+        return @out;
     }
 
 

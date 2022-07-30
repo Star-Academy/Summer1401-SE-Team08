@@ -29,7 +29,7 @@ public class Tokenizer : ITokenizer
     
     public List<string> Tokenize(string contents)
     {
-        contents = Regex.Replace(contents, GetRegex(), "").ToUpper();
+        contents = Regex.Replace(contents, GetRegex(), "").ToUpper().Trim();
         return new List<string>(Regex.Split(contents,"[\\s]+"));
     }
     

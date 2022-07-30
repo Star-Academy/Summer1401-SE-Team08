@@ -4,13 +4,13 @@ public class SearchEngine : ISearchEngine
 {
 
     public Dictionary<string, List<string>> DocIdToContents { get; }
-    public Dictionary<string, HashSet<string>> WordToDocId ;
+    private readonly Dictionary<string, HashSet<string>> _wordToDocId ;
 
 
     public SearchEngine()
     {
         DocIdToContents = new Dictionary<string, List<string>>();
-        WordToDocId = new Dictionary<string, HashSet<string>>();
+        _wordToDocId = new Dictionary<string, HashSet<string>>();
     }
 
     public void AddToSearchEngine(Dictionary<string, List<string>> newDocs)
@@ -18,26 +18,26 @@ public class SearchEngine : ISearchEngine
         DocIdToContents.Merge(newDocs);
         foreach (var doc in newDocs)
         {
-            AddToWordToDocID(doc.Key,doc.Value);
+            AddToWordToDocId(doc.Key,doc.Value);
         }
     }
 
-    private void AddToWordToDocID(string docId, List<string> words)
+    private void AddToWordToDocId(string docId, List<string> words)
     {
         foreach(var word in words)
         {
-            if (!WordToDocId.ContainsKey(word))
+            if (!_wordToDocId.ContainsKey(word))
             {
-                WordToDocId.Add(word, new HashSet<string>());
+                _wordToDocId.Add(word, new HashSet<string>());
             }
 
-            WordToDocId[word].Add(docId);
+            _wordToDocId[word].Add(docId);
         }
     }
 
     public HashSet<string> Search(string word)
     {
-        return WordToDocId.ContainsKey(word) ? WordToDocId[word] : new HashSet<string>();
+        return _wordToDocId.ContainsKey(word) ? _wordToDocId[word] : new HashSet<string>();
     }
     
 }

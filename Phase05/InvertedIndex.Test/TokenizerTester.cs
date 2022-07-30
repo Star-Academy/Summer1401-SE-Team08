@@ -9,9 +9,9 @@ public class TokenizerTester
     {
         IEnumerable<string> expected = new List<string>()
         {
-            "T_h_e",
-            "+B3st",
-            "-Test"
+            "T_H_E",
+            "+B3ST",
+            "-T-E-S-T"
         };
         ITokenizer tokenizer = new Tokenizer(TokenizerMode.Query);
         IEnumerable<string> actual = tokenizer.Tokenize(" | @T_h_e@ $+B3st$ %-T-e-s-t% & ");
@@ -22,9 +22,9 @@ public class TokenizerTester
     public void TextTokenizerTest() {
         IEnumerable<string> expected = new List<string>()
         {
-            "T_h_e",
-            "B3st",
-            "Test"
+            "T_H_E",
+            "B3ST",
+            "TEST"
         };
         ITokenizer tokenizer = new Tokenizer(TokenizerMode.Text);
         IEnumerable<string> actual = tokenizer.Tokenize(" | @T_h_e@ $+B3st$ %-T-e-s-t% & ");

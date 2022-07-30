@@ -5,6 +5,9 @@ public class SearchEngineTester
 {
     private ISearchEngine _searchEngine;
     private IFileReader _fileReader;
+    
+    
+    //
     // public SearchEngineTester()
     // {
     //     _searchEngine = new SearchEngine();
@@ -18,6 +21,8 @@ public class SearchEngineTester
     [Fact]
     public void InvertedIndexTest()
     {
+
+        _searchEngine = new SearchEngine();
         IEnumerable<string> expected = new List<string>()
         {
             
