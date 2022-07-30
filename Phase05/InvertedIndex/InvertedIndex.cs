@@ -1,12 +1,10 @@
 ﻿using System;
 
 namespace InvertedIndex;
-public class Program
+public class InvertedIndex
 {
-    public static HashSet<string> Main(string[] args)
+    public static HashSet<string> Search(string query)
     {
-        Console.WriteLine("Enter your sentence to search!");
-        var query = Console.ReadLine();
         SearchEngine engine = new SearchEngine();
         ReadFiles(engine);
         return HandleQuery(engine, query);
@@ -38,18 +36,8 @@ public class Program
     {
         var handler = new QueryHandler(engine);
         var queryTokenizer = new Tokenizer(TokenizerMode.Query);
-        HashSet<string> @out = handler.HandleQuery(new Query(queryTokenizer.Tokenize(query)));
+        var @out = handler.HandleQuery(new Query(queryTokenizer.Tokenize(query)));
         return @out;
     }
-
-
-
-    private static void PrintResult(HashSet<string> result)
-    {
-        Console.WriteLine($"{result.Count} results were found:");
-        foreach (var s in result)
-        {
-            Console.WriteLine($"Document ID: {s}");
-        }
-    }
+    
 }

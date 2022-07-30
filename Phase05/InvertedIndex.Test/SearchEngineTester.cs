@@ -5,29 +5,53 @@ public class SearchEngineTester
 {
     private ISearchEngine _searchEngine;
     private IFileReader _fileReader;
-    
-    
-    //
-    // public SearchEngineTester()
-    // {
-    //     _searchEngine = new SearchEngine();
-    //     _fileReader = new FileReader(); 
-    //     string folderPath = "..//EnglishData";
-    //     var docIdToContents = _fileReader.ReadFolder(folderPath);
-    //     _searchEngine.AddToSearchEngine(docIdToContents);
-    //     // add folder to database
-    // }
 
-    [Fact]
-    public void InvertedIndexTest()
+    private static Dictionary<string, List<string>> _docs = new Dictionary<string, List<string>>()
     {
-
-        _searchEngine = new SearchEngine();
-        IEnumerable<string> expected = new List<string>()
+        ["1.txt"] = new List<string>()
         {
-            
-        };
-        IEnumerable<string> actual = _searchEngine.Search("TEST");
-        actual.Should().BeEquivalentTo(expected);
+            "HELLO",
+            "MY",
+            "NAME",
+            "IS",
+            "ARYA"
+        },
+        ["2.txt"] = new List<string>()
+        {
+            "ARYA",
+            "DOESNT",
+            "WANT",
+            "TO",
+            "SAY",
+            "HELLO",
+            "TO",
+            "KHOSRO"
+        },
+        ["3.txt"] = new List<string>()
+        {
+            "KHOSRO",
+            "LOVES",
+            "LINQ"
+        }
+    };
+
+
+
+    public SearchEngineTester()
+    {
+        _searchEngine = new SearchEngine();
+        _searchEngine.AddToSearchEngine(_docs);
+    }
+
+   [Fact]
+   public void InvertedIndexTest()
+    {
+        var expected = new HashSet<string> { "1.txt", "2.txt" };
+        var actual = _searchEngine.Search("ARYA");
+        Assert.Equal(actual, expected);
+
+        expected = new HashSet<string>() { "2.txt", "3.txt" };
+        actual = _searchEngine.Search("KHOSRO");
+        Assert.Equal(actual, expected);
     }
 }

@@ -7,12 +7,12 @@ public class QueryHandler : IHandler
 
     public void SetIndex(SearchEngine engine)
     {
-        this._engine = engine;
+        _engine = engine;
     }
 
     public QueryHandler(SearchEngine engine)
     {
-        this._engine = engine;
+        _engine = engine;
     }
 
     public HashSet<string> HandleQuery(Query query)
