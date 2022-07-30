@@ -1,6 +1,6 @@
 ﻿namespace InvertedIndex;
 
-public class SearchEngine
+public class SearchEngine : ISearchEngine
 {
     
 }

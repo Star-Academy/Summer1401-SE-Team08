@@ -7,7 +7,7 @@ public enum TokenType
     Not
 }
 
-static class TokenMethods
+public static class TokenMethods
 {
 
     public static TokenType GetTokenType(this string token)

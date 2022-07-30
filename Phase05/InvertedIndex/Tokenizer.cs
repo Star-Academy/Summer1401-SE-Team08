@@ -32,4 +32,14 @@ public class Tokenizer : ITokenizer
         contents = Regex.Replace(contents, GetRegex(), "").ToUpper();
         return new List<string>(Regex.Split(contents,"[\\s]+"));
     }
+    
+    public Dictionary<string,List<string>> Tokenize(Dictionary<string,string> docIdToContents)
+    {
+        var docIdToTokensList = new Dictionary<string, List<string>>();
+        foreach (var idToContent in docIdToContents)
+        {
+            docIdToTokensList.Add(idToContent.Key, Tokenize(idToContent.Value));
+        }
+        return docIdToTokensList;
+    }
 }
