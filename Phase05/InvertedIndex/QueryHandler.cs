@@ -5,7 +5,6 @@ public class QueryHandler : IHandler
 
     private SearchEngine _engine;
 
-
     public void SetIndex(SearchEngine engine)
     {
         this._engine = engine;
@@ -15,14 +14,12 @@ public class QueryHandler : IHandler
     {
         this._engine = engine;
     }
-    
-    
-    
+
     public HashSet<string> HandleQuery(Query query)
     {
         var universalSet = new HashSet<string>(_engine.DocIdToContents.Keys);
         var answer = GetIntersectionSet(query.andWords, universalSet);
-        if (!query.orWords.Any())
+        if (query.orWords.Any())
         {
             answer.IntersectWith(GetUnionSet(query.orWords));
         }

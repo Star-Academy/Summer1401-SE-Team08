@@ -16,6 +16,10 @@ public class SearchEngine : ISearchEngine
     public void AddToSearchEngine(Dictionary<string, List<string>> newDocs)
     {
         DocIdToContents.Merge(newDocs);
+        foreach (var doc in newDocs)
+        {
+            AddToWordToDocID(doc.Key,doc.Value);
+        }
     }
 
     private void AddToWordToDocID(string docId, List<string> words)
