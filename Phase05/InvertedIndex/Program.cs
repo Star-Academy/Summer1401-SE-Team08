@@ -8,6 +8,8 @@ public class Program
         Console.Write("Enter your sentence to search!");
         var query = Console.ReadLine();
         SearchEngine engine = new SearchEngine();
+        ReadFiles(engine);
+        
     }
 
     private static void ReadFiles(SearchEngine engine)
@@ -30,11 +32,20 @@ public class Program
         }
     }
 
-
-
-    private static void PrintResult(HashSet<string> result, TimeRange time)
+    private static void HandleQuery(SearchEngine engine, string query)
     {
-        Console.WriteLine("About " + result.Count + " results " + time);
+        var handler = new QueryHandler(engine);
+        var queryTokenizer = new Tokenizer(TokenizerMode.Query);
+        HashSet<string> @out = handler.HandleQuery(new Query(queryTokenizer.Tokenize(query)));
+        PrintResult(@out);
+
+    }
+
+
+
+    private static void PrintResult(HashSet<string> result)
+    {
+        Console.WriteLine("About " + result.Count + " results");
         foreach (var s in result)
         {
             Console.WriteLine("Document name: " + s);

@@ -5,15 +5,15 @@ public class SearchEngineTester
 {
     private ISearchEngine _searchEngine;
     private IFileReader _fileReader;
-    public SearchEngineTester()
-    {
-        _searchEngine = new SearchEngine();
-        _fileReader = new FileReader(); 
-        string folderPath = "..//EnglishData";
-        var docIdToContents = _fileReader.ReadFolder(folderPath);
-        _searchEngine.AddToInvertedIndex(doc);
-        // add folder to database
-    }
+    // public SearchEngineTester()
+    // {
+    //     _searchEngine = new SearchEngine();
+    //     _fileReader = new FileReader(); 
+    //     string folderPath = "..//EnglishData";
+    //     var docIdToContents = _fileReader.ReadFolder(folderPath);
+    //     _searchEngine.AddToSearchEngine(docIdToContents);
+    //     // add folder to database
+    // }
 
     [Fact]
     public void InvertedIndexTest()
