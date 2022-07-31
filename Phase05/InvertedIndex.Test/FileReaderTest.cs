@@ -11,7 +11,7 @@ public class FileReaderTest
         _fileReader = new FileReader();
     }
     [Fact]
-    public void ReadFolderTest()
+    public void Read_Folder_Result()
     {
         var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName +
                    "\\ReadFolderTest";

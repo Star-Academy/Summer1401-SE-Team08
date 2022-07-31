@@ -2,7 +2,7 @@
 
 public class QueryTester
 {
-    private Query _query;
+    private readonly Query _query;
 
     public QueryTester()
     {
@@ -21,7 +21,7 @@ public class QueryTester
 
 
     [Fact]
-    public void QueryWordsTest()
+    public void Query_Type_Matches()
     {
         Assert.Equal(_query.AndWords, new List<string>()
         {

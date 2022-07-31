@@ -6,7 +6,7 @@ namespace InvertedIndex.Test;
 public class TokenizerTester
 {
     [Fact]
-    public void QueryTokenizerTest()
+    public void Tokenize_Query_Match()
     {
         var expected = new List<string>()
         {
@@ -20,7 +20,8 @@ public class TokenizerTester
     }
 
     [Fact]
-    public void TextTokenizerTest() {
+    public void Tokenize_Text_Match()
+    {
         var expected = new List<string>()
         {
             "T_H_E",
@@ -30,15 +31,5 @@ public class TokenizerTester
         var tokenizer = new Tokenizer(TokenizerMode.Text);
         var actual = tokenizer.Tokenize(" | @T_h_e@ $+B3st$ %-T-e-s-t% & ");
         actual.Should().BeEquivalentTo(expected);
-    }
-    
-    [Theory]
-    [InlineData("random",TokenType.And)]
-    [InlineData("+random",TokenType.Or)]
-    [InlineData("-random",TokenType.Not)]
-    public void TokenTypeTest(string token, TokenType expected)
-    {
-        var actual = token.GetTokenType();
-        actual.Should().Be(expected);
     }
 }

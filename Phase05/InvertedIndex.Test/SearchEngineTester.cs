@@ -45,7 +45,7 @@ public class SearchEngineTester
     }
 
    [Fact]
-   public void InvertedIndexTest()
+   public void Search_SingleWord_Files()
     {
         var expected = new HashSet<string> { "1.txt", "2.txt" };
         var actual = _searchEngine.SearchForWord("ARYA");

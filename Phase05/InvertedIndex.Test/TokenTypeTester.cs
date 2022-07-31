@@ -8,7 +8,7 @@ public class TokenTypeTester
     [InlineData("+test",TokenType.Or)]
     [InlineData("-test",TokenType.Not)]
     [InlineData("test", TokenType.And)]
-    public void GetTokenTypeTester(string query, TokenType expected)
+    public void String_Matches_Token(string query, TokenType expected)
     {
         var actual = query.GetTokenType();
         Assert.Equal(expected, actual);
