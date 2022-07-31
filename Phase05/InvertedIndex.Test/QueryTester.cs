@@ -23,19 +23,19 @@ public class QueryTester
     [Fact]
     public void QueryWordsTest()
     {
-        Assert.Equal(_query.andWords, new List<string>()
+        Assert.Equal(_query.AndWords, new List<string>()
         {
             "HASTID?"
         });
         
-        Assert.Equal(_query.orWords, new List<string>()
+        Assert.Equal(_query.OrWords, new List<string>()
         {
             "SALAM",
             "MAMNON",
             "SHOMA"
         });
         
-        Assert.Equal(_query.notWords, new List<string>()
+        Assert.Equal(_query.NotWords, new List<string>()
         {
             "KHOB",
             "CHETORID"

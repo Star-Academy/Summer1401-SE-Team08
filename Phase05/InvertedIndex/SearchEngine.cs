@@ -1,9 +1,12 @@
-﻿namespace InvertedIndex;
+﻿using InvertedIndex.Abstraction;
+
+
+namespace InvertedIndex;
 
 public class SearchEngine : ISearchEngine
 {
 
-    public Dictionary<string, List<string>> DocIdToContents { get; }
+    public Dictionary<string, List<string>> DocIdToContents { get; set; }
     private readonly Dictionary<string, HashSet<string>> _wordToDocId ;
 
 
@@ -15,7 +18,9 @@ public class SearchEngine : ISearchEngine
 
     public void AddToSearchEngine(Dictionary<string, List<string>> newDocs)
     {
-        DocIdToContents.Merge(newDocs);
+        DocIdToContents = DocIdToContents.Union(newDocs).ToDictionary
+            (s => s.Key, s => s.Value);
+
         foreach (var doc in newDocs)
         {
             AddToWordToDocId(doc.Key,doc.Value);
@@ -35,7 +40,7 @@ public class SearchEngine : ISearchEngine
         }
     }
 
-    public HashSet<string> Search(string word)
+    public HashSet<string> SearchForWord(string word)
     {
         return _wordToDocId.ContainsKey(word) ? _wordToDocId[word] : new HashSet<string>();
     }

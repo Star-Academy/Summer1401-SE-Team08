@@ -1,4 +1,4 @@
-﻿namespace InvertedIndex;
+﻿namespace InvertedIndex.Enums;
 
 public enum TokenType
 {
@@ -15,7 +15,8 @@ public static class TokenMethods
         if (token.StartsWith("+"))
         {
             return TokenType.Or;
-        } else if (token.StartsWith("-"))
+        }
+        if (token.StartsWith("-"))
         {
             return TokenType.Not;
         }

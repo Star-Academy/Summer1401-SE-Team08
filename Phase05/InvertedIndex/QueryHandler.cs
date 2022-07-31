@@ -1,14 +1,11 @@
-﻿namespace InvertedIndex;
+﻿using InvertedIndex.Abstraction;
+
+namespace InvertedIndex;
 
 public class QueryHandler : IHandler
 {
 
-    private SearchEngine _engine;
-
-    public void SetIndex(SearchEngine engine)
-    {
-        _engine = engine;
-    }
+    private readonly SearchEngine _engine;
 
     public QueryHandler(SearchEngine engine)
     {
@@ -18,13 +15,13 @@ public class QueryHandler : IHandler
     public HashSet<string> HandleQuery(Query query)
     {
         var universalSet = new HashSet<string>(_engine.DocIdToContents.Keys);
-        var answer = GetIntersectionSet(query.andWords, universalSet);
-        if (query.orWords.Any())
+        var answer = GetIntersectionSet(query.AndWords, universalSet);
+        if (query.OrWords.Any())
         {
-            answer.IntersectWith(GetUnionSet(query.orWords));
+            answer.IntersectWith(GetUnionSet(query.OrWords));
         }
 
-        answer.RemoveWhere(p => GetUnionSet(query.notWords).Contains(p));
+        answer.RemoveWhere(p => GetUnionSet(query.NotWords).Contains(p));
         return answer;
     }
 
@@ -33,7 +30,7 @@ public class QueryHandler : IHandler
         var set = new HashSet<string>();
         foreach (var word in words)
         {
-            set.UnionWith(_engine.Search(word));
+            set.UnionWith(_engine.SearchForWord(word));
         }
 
         return set;
@@ -44,7 +41,7 @@ public class QueryHandler : IHandler
         HashSet<string> set = new HashSet<string>(universalSet);
         foreach (string word in words)
         {
-            set.IntersectWith(_engine.Search(word));
+            set.IntersectWith(_engine.SearchForWord(word));
         }
 
         return set;

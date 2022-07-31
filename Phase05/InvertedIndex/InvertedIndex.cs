@@ -1,11 +1,13 @@
-﻿using System;
+﻿using InvertedIndex.Enums;
+
+
 
 namespace InvertedIndex;
 public class InvertedIndex
 {
-    public static HashSet<string> Search(string query)
+    public static HashSet<string> SearchDocsForQuery(string query)
     {
-        SearchEngine engine = new SearchEngine();
+        var engine = new SearchEngine();
         ReadFiles(engine);
         return HandleQuery(engine, query);
     }
@@ -16,7 +18,7 @@ public class InvertedIndex
         try
         {
             var fileReader = new FileReader();
-            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\EnglishData";
+            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\EnglishData";
             var docs = fileReader.ReadFolder(path);
             var tokenizedDocs = new Dictionary<string, List<string>>();
             foreach (var key in docs.Keys)

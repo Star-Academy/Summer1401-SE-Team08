@@ -1,12 +1,13 @@
-﻿namespace InvertedIndex.Test;
+﻿using InvertedIndex.Abstraction;
+
+namespace InvertedIndex.Test;
 
 using FluentAssertions;
 public class SearchEngineTester
 {
-    private ISearchEngine _searchEngine;
-    private IFileReader _fileReader;
+    private readonly ISearchEngine _searchEngine;
 
-    private static Dictionary<string, List<string>> _docs = new Dictionary<string, List<string>>()
+    private readonly Dictionary<string, List<string>> _docs = new Dictionary<string, List<string>>()
     {
         ["1.txt"] = new List<string>()
         {
@@ -47,11 +48,11 @@ public class SearchEngineTester
    public void InvertedIndexTest()
     {
         var expected = new HashSet<string> { "1.txt", "2.txt" };
-        var actual = _searchEngine.Search("ARYA");
+        var actual = _searchEngine.SearchForWord("ARYA");
         Assert.Equal(actual, expected);
 
         expected = new HashSet<string>() { "2.txt", "3.txt" };
-        actual = _searchEngine.Search("KHOSRO");
+        actual = _searchEngine.SearchForWord("KHOSRO");
         Assert.Equal(actual, expected);
     }
 }

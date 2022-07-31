@@ -1,11 +1,13 @@
 ﻿using System.Text.RegularExpressions;
+using InvertedIndex.Abstraction;
+using InvertedIndex.Enums;
 
 namespace InvertedIndex;
 
 public class Tokenizer : ITokenizer
 {
 
-    private TokenizerMode _mode;
+    private readonly TokenizerMode _mode;
 
     private const string QueryRegex = "[^+\\-\\w\\s]";
     private const string TextRegex = "[^\\w\\s]";
@@ -13,17 +15,12 @@ public class Tokenizer : ITokenizer
 
     public Tokenizer(TokenizerMode mode)
     {
-        SetMode(mode);
-    }
-
-    public void SetMode(TokenizerMode mode)
-    {
-        this._mode = mode;
+        _mode = mode;
     }
 
     private string GetRegex()
     {
-        return this._mode == TokenizerMode.Query ? QueryRegex : TextRegex;
+        return _mode == TokenizerMode.Query ? QueryRegex : TextRegex;
     }
     
     

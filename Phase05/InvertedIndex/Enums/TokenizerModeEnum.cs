@@ -1,4 +1,4 @@
-﻿namespace InvertedIndex;
+﻿namespace InvertedIndex.Enums;
 
 public enum TokenizerMode
 {

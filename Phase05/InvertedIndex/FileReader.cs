@@ -1,4 +1,7 @@
-﻿namespace InvertedIndex;
+﻿using InvertedIndex.Abstraction;
+
+namespace InvertedIndex;
+
 
 public class FileReader : IFileReader
 {

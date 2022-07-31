@@ -1,4 +1,6 @@
-﻿namespace InvertedIndex.Test;
+﻿using InvertedIndex.Enums;
+
+namespace InvertedIndex.Test;
 
 public class TokenTypeTester
 {

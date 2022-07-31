@@ -1,12 +1,14 @@
-﻿namespace InvertedIndex.Test;
+﻿using InvertedIndex.Abstraction;
+
+namespace InvertedIndex.Test;
 
 public class FileReaderTest
 {
-    private readonly FileReader _fileReader;
+    private readonly IFileReader _fileReader;
 
     public FileReaderTest()
     {
-        this._fileReader = new FileReader();
+        _fileReader = new FileReader();
     }
     [Fact]
     public void ReadFolderTest()
