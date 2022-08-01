@@ -1,3 +1,3 @@
-# Summer1401-SE-Team08
+[![build](https://github.com/Star-Academy/Summer1401-SE-Team08/actions/workflows/buildPipleline.yml/badge.svg?branch=TDD)](https://github.com/Star-Academy/Summer1401-SE-Team08/actions/workflows/buildPipleline.yml)
 
-## Phase 3 - Read the information of some students and their grades from a file in C# and return the top 3 students based on their average.
+# Summer1401-SE-Team08
