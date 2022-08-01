@@ -5,9 +5,9 @@ namespace InvertedIndex;
 public class QueryHandler : IHandler
 {
 
-    private readonly SearchEngine _engine;
+    private readonly ISearchEngine _engine;
 
-    public QueryHandler(SearchEngine engine)
+    public QueryHandler(ISearchEngine engine)
     {
         _engine = engine;
     }

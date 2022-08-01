@@ -7,10 +7,8 @@ namespace InvertedIndex;
 public class InvertedIndex
 {
 
-    private IQueryBuilder _queryBuilder;
-
-
-
+    private readonly IQueryBuilder _queryBuilder;
+    
     public InvertedIndex()
     {
         _queryBuilder = new QueryBuilder();
