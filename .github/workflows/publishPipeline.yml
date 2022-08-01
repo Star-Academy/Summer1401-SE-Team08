@@ -21,7 +21,7 @@ jobs:
           repository: Star-Academy/Summer1401-SE-Team08
       - name: Build library and generate NuGet Package
         run: dotnet pack -c Release -o artifacts -p:PackageVersion=${{ steps.version.outputs.release }}
-        working-directory: Phase05\InvertedIndex
+        working-directory: Phase05/InvertedIndex
       - name: Publish NuGet Package
         run: dotnet nuget push ./**/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
   
