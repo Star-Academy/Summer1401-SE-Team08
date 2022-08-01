@@ -43,7 +43,6 @@ public class QueryHandler : IHandler
         {
             set.IntersectWith(_engine.SearchForWord(word));
         }
-
         return set;
     }
 }

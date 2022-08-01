@@ -1,18 +1,28 @@
-﻿using InvertedIndex.Enums;
+﻿using InvertedIndex.Abstraction;
+using InvertedIndex.Enums;
 
 
 
 namespace InvertedIndex;
 public class InvertedIndex
 {
-    public static HashSet<string> SearchDocsForQuery(string query)
+
+    private IQueryBuilder _queryBuilder;
+
+
+
+    public InvertedIndex()
+    {
+        _queryBuilder = new QueryBuilder();
+    }
+    public HashSet<string> SearchDocsForQuery(string query)
     {
         var engine = new SearchEngine();
         ReadFiles(engine);
         return HandleQuery(engine, query);
     }
 
-    private static void ReadFiles(SearchEngine engine)
+    private void ReadFiles(SearchEngine engine)
     {
         var textTokenizer = new Tokenizer(TokenizerMode.Text);
         try
@@ -34,11 +44,11 @@ public class InvertedIndex
         }
     }
 
-    private static HashSet<string> HandleQuery(SearchEngine engine, string query)
+    private HashSet<string> HandleQuery(SearchEngine engine, string query)
     {
         var handler = new QueryHandler(engine);
         var queryTokenizer = new Tokenizer(TokenizerMode.Query);
-        var @out = handler.HandleQuery(new Query(queryTokenizer.Tokenize(query)));
+        var @out = handler.HandleQuery(_queryBuilder.BuildQuery(queryTokenizer.Tokenize(query)));
         return @out;
     }
     
