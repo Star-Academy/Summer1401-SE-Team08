@@ -8,10 +8,12 @@ public class InvertedIndex
 {
 
     private readonly IQueryBuilder _queryBuilder;
+    private readonly string _path;
     
-    public InvertedIndex()
+    public InvertedIndex(string path)
     {
         _queryBuilder = new QueryBuilder();
+        _path = path;
     }
     public HashSet<string> SearchDocsForQuery(string query)
     {
@@ -26,8 +28,7 @@ public class InvertedIndex
         try
         {
             var fileReader = new FileReader();
-            var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\EnglishData";
-            var docs = fileReader.ReadFolder(path);
+            var docs = fileReader.ReadFolder(_path);
             var tokenizedDocs = new Dictionary<string, List<string>>();
             foreach (var key in docs.Keys)
             {
