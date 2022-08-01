@@ -1,4 +1,4 @@
-﻿namespace SimpleCalculator.Business.Abstraction
+﻿namespace Phase04.SimpleCalculator.Business.Abstraction
 {
     public interface IOperator
     {

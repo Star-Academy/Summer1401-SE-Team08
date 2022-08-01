@@ -1,16 +1,16 @@
-﻿using SimpleCalculator.Business;
-using SimpleCalculator.Business.Enums;
+﻿using Phase04.SimpleCalculator.Business;
+using Phase04.SimpleCalculator.Business.Enums;
 
-namespace SimpleCalculator.ConsoleApp
+namespace Phase04.SimpleCalculator
 {
     internal class UiManager
     {
-        private static readonly Dictionary<string, OperatorEnum> s_operatorSigns = new()
+        private static readonly Dictionary<string, OperatorEnum> SOperatorSigns = new()
         {
-            {"+", OperatorEnum.sum },
-            {"-", OperatorEnum.sub },
-            {"*", OperatorEnum.multiply },
-            {"/", OperatorEnum.division }
+            {"+", OperatorEnum.Sum },
+            {"-", OperatorEnum.Sub },
+            {"*", OperatorEnum.Multiply },
+            {"/", OperatorEnum.Division }
         };
 
         private readonly Calculator _calculator;
@@ -49,17 +49,17 @@ namespace SimpleCalculator.ConsoleApp
         private static OperatorEnum GetOperator()
         {
             var operatorSign = GetOperatorSign();
-            while (!s_operatorSigns.ContainsKey(operatorSign))
+            while (!SOperatorSigns.ContainsKey(operatorSign))
             {
                 Console.WriteLine($"Given operator '{operatorSign}' is not valid!");
                 operatorSign = GetOperatorSign();
             }
-            return s_operatorSigns[operatorSign];
+            return SOperatorSigns[operatorSign];
         }
 
         private static string GetOperatorSign()
         {
-            Console.WriteLine($"Write operator sign ({string.Join(',', s_operatorSigns.Keys)}):");
+            Console.WriteLine($"Write operator sign ({string.Join(',', SOperatorSigns.Keys)}):");
             return Console.ReadLine().Trim();
         }
 

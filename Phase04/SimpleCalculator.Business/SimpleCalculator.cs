@@ -1,8 +1,8 @@
-﻿using SimpleCalculator.Business.Abstraction;
-using SimpleCalculator.Business.Enums;
-using SimpleCalculator.Business.OperatorBusiness;
+﻿using Phase04.SimpleCalculator.Business.Abstraction;
+using Phase04.SimpleCalculator.Business.Enums;
+using Phase04.SimpleCalculator.Business.OperatorBusiness;
 
-namespace SimpleCalculator.Business
+namespace Phase04.SimpleCalculator.Business
 {
     public class Calculator
     {

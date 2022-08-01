@@ -1,8 +1,8 @@
-﻿using SimpleCalculator.Business.Abstraction;
+﻿using Phase04.SimpleCalculator.Business.Abstraction;
 
-namespace SimpleCalculator.Business.OperatorBusiness.Operators
+namespace Phase04.SimpleCalculator.Business.OperatorBusiness.Operators
 {
-    internal class DivisionOperator : IOperator
+    public class DivisionOperator : IOperator
     {
         public int Calculate(int first, int second)
         {

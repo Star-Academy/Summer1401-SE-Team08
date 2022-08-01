@@ -1,6 +1,6 @@
-﻿using SimpleCalculator.Business.Enums;
+﻿using Phase04.SimpleCalculator.Business.Enums;
 
-namespace SimpleCalculator.Business.Abstraction
+namespace Phase04.SimpleCalculator.Business.Abstraction
 {
     public interface IOperatorProvider
     {

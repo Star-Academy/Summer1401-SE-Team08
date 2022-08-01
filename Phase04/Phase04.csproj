@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentAssertions" Version="6.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="Moq" Version="4.18.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -20,6 +21,23 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="SimpleCalculator-master\.gitattributes" />
+    <None Remove="SimpleCalculator-master\.gitignore" />
+    <None Remove="SimpleCalculator-master\SimpleCalculator\**" />
+    <None Remove="SimpleCalculator-master\SimpleCalculator.Business\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="SimpleCalculator-master\SimpleCalculator\**" />
+    <Compile Remove="SimpleCalculator-master\SimpleCalculator.Business\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="SimpleCalculator-master\SimpleCalculator\**" />
+    <EmbeddedResource Remove="SimpleCalculator-master\SimpleCalculator.Business\**" />
   </ItemGroup>
 
 </Project>
