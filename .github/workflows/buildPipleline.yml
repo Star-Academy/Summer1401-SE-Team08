@@ -27,7 +27,7 @@ jobs:
               working-directory: Phase05
 
             - name: Test
-              run: dotnet test --no-restore --verbosity normal --collect:"XPlat Code Coverage"
+              run: dotnet test --no-restore --verbosity normal
               working-directory: Phase05
 
             # - name: Publish code coverage reports to codecove.io
