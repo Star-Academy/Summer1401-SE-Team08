@@ -14,7 +14,7 @@ public class FileReaderTest
     public void Read_Folder_Result()
     {
         var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName +
-                        "\\ReadFolderTest";
+                        "//ReadFolderTest";
         var actual = _fileReader.ReadFolder(path);
         var expected = new Dictionary<string, string>()
         {
