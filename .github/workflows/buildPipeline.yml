@@ -2,9 +2,9 @@ name: build
 
 on:
     push:
-        branches: ["TDD"]
+        branches: ["CICD"]
     pull_request:
-        branches: ["TDD"]
+        branches: ["CICD"]
 
 jobs:
     build:
