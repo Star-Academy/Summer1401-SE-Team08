@@ -2,4 +2,4 @@
 using Phase04.SimpleCalculator;
 
 new UiManager(new Calculator())
-    .StartUI();
+    .StartUi();

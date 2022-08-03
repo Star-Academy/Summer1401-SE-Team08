@@ -10,61 +10,64 @@ namespace Phase04.SimpleCalculator.Tests;
 public class CalculatorTester
 {
 
-    [Theory]
-    [InlineData(0,1,1)]
-    public void CalculatorAdditionTest(int firstOperand, int secondOperand, int expected) {
+    [Fact]
+    public void CalculatorAdditionTest()
+    {
         // Arrange
-        var providerSub = new Mock<IOperatorProvider>();
-        providerSub.Setup(x => x.GetOperator(OperatorEnum.Sum)).Returns(new SumOperator());
-        var calculator = new Calculator(providerSub.Object);
-        // Act
-        var actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.Sum);
+        var sumOperator = Substitute.For<IOperator>();
+        sumOperator.Calculate(1, 23).Returns(24);
+        var provider = Substitute.For<IOperatorProvider>();
+        provider.GetOperator(OperatorEnum.Sum).Returns(sumOperator);
+        const int expected = 24;
+        // Act 
+        var calculator = new Calculator(provider);
+        var actual = calculator.Calculate(1, 23, OperatorEnum.Sum);
         // Assert
         actual.Should().Be(expected);
     }
 
-    [Theory]
-    [InlineData(0,1,-1)]
-    [InlineData(2,0,2)]
-    [InlineData(-3,0,-3)]
-    public void CalculatorSubTest(int firstOperand, int secondOperand, int expected) {
+    [Fact]
+    public void CalculatorSubTest() {
         // Arrange
-        var providerSub = new Mock<IOperatorProvider>();
-        providerSub.Setup(x => x.GetOperator(OperatorEnum.Sub)).Returns(new SubOperator());
-        var calculator = new Calculator(providerSub.Object);
-        // Act
-        var actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.Sub);
+        var subOperator = Substitute.For<IOperator>();
+        subOperator.Calculate(30, 2).Returns(28);
+        var provider = Substitute.For<IOperatorProvider>();
+        provider.GetOperator(OperatorEnum.Sub).Returns(subOperator);
+        const int expected = 28;
+        // Act 
+        var calculator = new Calculator(provider);
+        var actual = calculator.Calculate(30, 2, OperatorEnum.Sub);
         // Assert
         actual.Should().Be(expected);
     }
 
 
-    [Theory]
-    [InlineData(5,6,30)]
-    [InlineData(6,5,30)]
-    [InlineData(7,-8,-56)]
-    public void CalculatorMultiplicationTest(int firstOperand, int secondOperand, int expected) {
+    [Fact]
+    public void CalculatorMultiplicationTest() {
         // Arrange
-        var providerSub = new Mock<IOperatorProvider>();
-        providerSub.Setup(x => x.GetOperator(OperatorEnum.Multiply)).Returns(new MultiplyOperator());
-        var calculator = new Calculator(providerSub.Object);
-        // Act
-        var actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.Multiply);
+        var multiplicationOperator = Substitute.For<IOperator>();
+        multiplicationOperator.Calculate(30, 2).Returns(60);
+        var provider = Substitute.For<IOperatorProvider>();
+        provider.GetOperator(OperatorEnum.Multiply).Returns(multiplicationOperator);
+        const int expected = 60;
+        // Act 
+        var calculator = new Calculator(provider);
+        var actual = calculator.Calculate(30, 2, OperatorEnum.Multiply);
         // Assert
         actual.Should().Be(expected);
     }
 
-    [Theory]
-    [InlineData(-8,7,-1)]
-    [InlineData(-9,10,0)]
-    [InlineData(10,-9,-1)]
-    public void CalculatorDivisionTest(int firstOperand, int secondOperand, int expected) {
-        // Arrange 
-        var providerSub = new Mock<IOperatorProvider>();
-        providerSub.Setup(x => x.GetOperator(OperatorEnum.Division)).Returns(new DivisionOperator());
-        var calculator = new Calculator(providerSub.Object);
-        // Act
-        var actual = calculator.Calculate(firstOperand, secondOperand, OperatorEnum.Division);
+    [Fact]
+    public void CalculatorDivisionTest() {
+        // Arrange
+        var divisionOperator = Substitute.For<IOperator>();
+        divisionOperator.Calculate(30, 2).Returns(15);
+        var provider = Substitute.For<IOperatorProvider>();
+        provider.GetOperator(OperatorEnum.Division).Returns(divisionOperator);
+        const int expected = 15;
+        // Act 
+        var calculator = new Calculator(provider);
+        var actual = calculator.Calculate(30, 2, OperatorEnum.Division);
         // Assert
         actual.Should().Be(expected);
     }

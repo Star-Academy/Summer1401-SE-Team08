@@ -20,7 +20,7 @@ namespace Phase04.SimpleCalculator
             _calculator = calculator;
         }
 
-        public void StartUI()
+        public void StartUi()
         {
             SayHi();
             var operatorType = GetOperator();
