@@ -1,25 +1,16 @@
 ﻿namespace EFCore;
 
 using System.Text.Json;
-using EFCore.Database;
-using EFCore.Entity;
+using Database;
+using Entity;
 
-public class Prgram
+public class Program
 {
-    public const int NumberOfTopStudents = 3;
+    private const int NumberOfTopStudents = 3;
 
     public static void Main(string[] args)
     {
-        StudentDatabase database;
-        try
-        {
-            database = new StudentDatabase();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return;
-        }
+        using var database = new StudentDatabase();
 
         PathConfigurations pathConfigurations;
         List<Student> students;
@@ -46,14 +37,19 @@ public class Prgram
         Console.WriteLine(string.Join('\n', topStudents));
     }
 
-    public static List<string> GetTopStudents(StudentDatabase database, int numberOfTopStudents)
+    private static IEnumerable<string> GetTopStudents(StudentDatabase database, int numberOfTopStudents)
     {
         var topStudents = database.Students.Select(s => new
         {
-            Average = database.Grades.Where(g => s.StudentNumber == g.StudentNumber).Select(g => g.Score).Average(),
+            Average = database.Grades.Where(g => s.StudentNumber == g.StudentNumber)
+                .Select(g => g.Score)
+                .Average(),
             Student = s
-        }).OrderByDescending(t => t.Average).Take(numberOfTopStudents).Select(t =>
-            $"FirstName: {t.Student.FirstName}, LastName: {t.Student.LastName}, Average: {t.Average}").ToList();
+        }).OrderByDescending(t => t.Average)
+            .Take(numberOfTopStudents)
+            .Select(t =>
+            $"FirstName: {t.Student.FirstName}, LastName: {t.Student.LastName}, Average: {t.Average}")
+            .ToList();
         return topStudents;
     }
 }

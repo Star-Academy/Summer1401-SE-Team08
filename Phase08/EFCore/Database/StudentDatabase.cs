@@ -1,8 +1,7 @@
 ﻿namespace EFCore.Database;
 
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-using EFCore.Entity;
+using Entity;
 
 public class StudentDatabase : DbContext
 {
