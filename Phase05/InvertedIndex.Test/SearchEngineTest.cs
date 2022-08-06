@@ -45,14 +45,20 @@ public class SearchEngineTester
     }
 
    [Fact]
-   public void Search_SingleWord_Files()
+   public void SearchEngine_Should_Return_Files_Containing_Searched_Word()
     {
+        // Arrange
         var expected = new HashSet<string> { "1.txt", "2.txt" };
+        // Act
         var actual = _searchEngine.SearchForWord("ARYA");
-        Assert.Equal(actual, expected);
+        // Assert
+        actual.Should().Equal(expected);
 
+        // Arrange
         expected = new HashSet<string>() { "2.txt", "3.txt" };
+        // Act
         actual = _searchEngine.SearchForWord("KHOSRO");
-        Assert.Equal(actual, expected);
+        // Assert
+        actual.Should().Equal(expected);
     }
 }

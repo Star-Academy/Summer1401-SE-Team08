@@ -6,8 +6,9 @@ namespace InvertedIndex.Test;
 public class TokenizerTester
 {
     [Fact]
-    public void Tokenize_Query_Match()
+    public void Tokenizer_Should_Tokenize_Query()
     {
+        // Arrange
         var expected = new List<string>()
         {
             "T_H_E",
@@ -15,13 +16,16 @@ public class TokenizerTester
             "-T-E-S-T"
         };
         var tokenizer = new Tokenizer(TokenizerMode.Query);
+        // Act
         var actual = tokenizer.Tokenize(" | @T_h_e@ $+B3st$ %-T-e-s-t% & ");
+        // Assert
         actual.Should().BeEquivalentTo(expected);
     }
 
     [Fact]
-    public void Tokenize_Text_Match()
+    public void Tokenizer_Should_Tokenize_Text()
     {
+        // Arrange
         var expected = new List<string>()
         {
             "T_H_E",
@@ -29,7 +33,9 @@ public class TokenizerTester
             "TEST"
         };
         var tokenizer = new Tokenizer(TokenizerMode.Text);
+        // Act
         var actual = tokenizer.Tokenize(" | @T_h_e@ $+B3st$ %-T-e-s-t% & ");
+        // Assert
         actual.Should().BeEquivalentTo(expected);
     }
 }

@@ -24,7 +24,7 @@ public class QueryBuilderTest
 
 
     [Fact]
-    public void AndWords_Should_ContainNothing()
+    public void AndWords_Should_Be_Empty()
     {
         // Arrange
         var expected = new List<string>()
@@ -40,7 +40,7 @@ public class QueryBuilderTest
 
 
     [Fact]
-    public void OrWords_Should_ContainPlus()
+    public void OrWords_Should_Contain_Plus()
     {
         // Arrange
         var expected = new List<string>()
@@ -55,7 +55,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void NotWords_Should_ContainMinus()
+    public void NotWords_Should_Contain_Minus()
     {
         // Arrange
         var expected = new List<string>()
