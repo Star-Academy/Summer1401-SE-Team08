@@ -11,7 +11,7 @@ public class StudentDatabase : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql(
-            "Host=localhost;Database=StudentDatabase;Username=postgres;Password=Khosro1381");
+            "Host=localhost;Database=StudentDatabase;Username=postgres;Password=a");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

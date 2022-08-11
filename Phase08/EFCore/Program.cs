@@ -7,23 +7,20 @@ using Entity;
 public class Program
 {
     private const int NumberOfTopStudents = 3;
+    private const string StudentsFileAddress = "../../../Data/students.json";
+    private const string GradesFileAddress = "../../../Data/scores.json";
 
     public static void Main(string[] args)
     {
         using var database = new StudentDatabase();
-
-        PathConfigurations pathConfigurations;
         List<Student> students;
         List<Grade> grades;
         try
         {
-            pathConfigurations =
-                JsonSerializer.Deserialize<PathConfigurations>(
-                    File.ReadAllText("../../../PathConfigurations.json"));
             students = JsonSerializer.Deserialize<List<Student>>(
-                File.ReadAllText(pathConfigurations.StudentsFileAddress));
+                File.ReadAllText(StudentsFileAddress));
             grades = JsonSerializer.Deserialize<List<Grade>>(
-                File.ReadAllText(pathConfigurations.GradesFileAddress));
+                File.ReadAllText(GradesFileAddress));
             database.AddRange(students);
             database.AddRange(grades);
             database.SaveChanges();
@@ -40,15 +37,15 @@ public class Program
     private static IEnumerable<string> GetTopStudents(StudentDatabase database, int numberOfTopStudents)
     {
         var topStudents = database.Students.Select(s => new
-        {
-            Average = database.Grades.Where(g => s.StudentNumber == g.StudentNumber)
-                .Select(g => g.Score)
-                .Average(),
-            Student = s
-        }).OrderByDescending(t => t.Average)
+            {
+                Average = database.Grades.Where(g => s.StudentNumber == g.StudentNumber)
+                    .Select(g => g.Score)
+                    .Average(),
+                Student = s
+            }).OrderByDescending(t => t.Average)
             .Take(numberOfTopStudents)
             .Select(t =>
-            $"FirstName: {t.Student.FirstName}, LastName: {t.Student.LastName}, Average: {t.Average}")
+                $"FirstName: {t.Student.FirstName}, LastName: {t.Student.LastName}, Average: {t.Average}")
             .ToList();
         return topStudents;
     }
