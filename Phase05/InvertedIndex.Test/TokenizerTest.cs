@@ -3,7 +3,7 @@ using InvertedIndex.Enums;
 
 namespace InvertedIndex.Test;
 
-public class TokenizerTester
+public class TokenizerTest
 {
     [Fact]
     public void QueryTokenizerTest_ShouldReturnAlphabeticalWordsWithSign_WhenGivenNonEnglishLetters()
