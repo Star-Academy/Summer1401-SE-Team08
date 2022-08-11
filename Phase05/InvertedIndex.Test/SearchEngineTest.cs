@@ -38,7 +38,7 @@ public class SearchEngineTest
     };
 
 
-    public SearchEngineTester()
+    public SearchEngineTest()
     {
         _searchEngine = new SearchEngine();
         _searchEngine.AddToSearchEngine(_docs);
