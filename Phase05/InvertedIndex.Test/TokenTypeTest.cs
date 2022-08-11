@@ -3,7 +3,7 @@ using InvertedIndex.Enums;
 
 namespace InvertedIndex.Test;
 
-public class TokenTypeTester
+public class TokenTypeTest
 {
     // Arrange
     [Theory]
