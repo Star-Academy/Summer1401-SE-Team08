@@ -4,7 +4,7 @@ namespace InvertedIndex.Test;
 
 using FluentAssertions;
 
-public class SearchEngineTester
+public class SearchEngineTest
 {
     private readonly ISearchEngine _searchEngine;
 
