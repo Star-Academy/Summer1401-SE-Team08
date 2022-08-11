@@ -6,7 +6,7 @@ namespace InvertedIndex.Test;
 public class TokenizerTester
 {
     [Fact]
-    public void Tokenizer_Should_Tokenize_Query()
+    public void QueryTokenizerTest_ShouldReturnAlphabeticalWordsWithSign_WhenGivenNonEnglishLetters()
     {
         // Arrange
         var expected = new List<string>()
@@ -23,7 +23,7 @@ public class TokenizerTester
     }
 
     [Fact]
-    public void Tokenizer_Should_Tokenize_Text()
+    public void TextTokenizerTest_ShouldReturnAlphabeticalWords_WhenGivenNonEnglishLetters()
     {
         // Arrange
         var expected = new List<string>()

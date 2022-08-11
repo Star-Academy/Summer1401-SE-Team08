@@ -8,7 +8,7 @@ public class InvertedIndexTest
     private Index Index;
 
     [Fact]
-    public void HandleQuery_Should_ProduceResult()
+    public void HandleQueryTest_ShouldReturnRelatedDocuments_WhenANewQueryComes()
     {
         // Arrange
         var builderMock = new Mock<IQueryBuilder>();

@@ -5,17 +5,18 @@ namespace InvertedIndex.Test;
 public class FileReaderTest
 {
     private readonly IFileReader _fileReader;
+
     public FileReaderTest()
     {
         _fileReader = new FileReader();
     }
-    
+
     [Fact]
-    public void FileReader_Should_Return_Folder_Data()
+    public void FileReaderTest_ShouldReturnContainingTxtFiles_WhenReadingAFolderContainingTxtFiles()
     {
         // Arrange
         var path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName +
-                        "//ReadFolderTest";
+                   "//ReadFolderTest";
         var expected = new Dictionary<string, string>()
         {
             ["1.txt"] = "a",
@@ -24,6 +25,6 @@ public class FileReaderTest
         // Act
         var actual = _fileReader.ReadFolder(path);
         // Assert
-        Assert.Equal(expected,actual);
+        Assert.Equal(expected, actual);
     }
 }

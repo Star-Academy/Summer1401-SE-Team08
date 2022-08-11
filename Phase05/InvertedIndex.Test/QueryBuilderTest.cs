@@ -7,6 +7,7 @@ namespace InvertedIndex.Test;
 public class QueryBuilderTest
 {
     private readonly IQueryBuilder _queryBuilder;
+
     private readonly List<string> _query = new List<string>()
     {
         "+FOOD",
@@ -24,7 +25,7 @@ public class QueryBuilderTest
 
 
     [Fact]
-    public void AndWords_Should_Be_Empty()
+    public void AndWordsTest_ShouldReturnEmptyWords_WhenGivenABunchOfTokens()
     {
         // Arrange
         var expected = new List<string>()
@@ -40,7 +41,7 @@ public class QueryBuilderTest
 
 
     [Fact]
-    public void OrWords_Should_Contain_Plus()
+    public void OrWordsTest_ShouldReturnPlusWords_WhenGivenABunchOfTokens()
     {
         // Arrange
         var expected = new List<string>()
@@ -55,7 +56,7 @@ public class QueryBuilderTest
     }
 
     [Fact]
-    public void NotWords_Should_Contain_Minus()
+    public void NotWordsTest_ShouldReturnMinusWords_WhenGivenABunchOfTokens()
     {
         // Arrange
         var expected = new List<string>()
