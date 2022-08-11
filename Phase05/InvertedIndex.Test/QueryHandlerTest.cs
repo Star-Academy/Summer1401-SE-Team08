@@ -10,7 +10,7 @@ public class QueryHandlerTest
 
     public QueryHandlerTest()
     {
-        _docIdSet = new()
+        _docIdSet = new Dictionary<string, List<string>>()
         {
             ["1"] = new List<string>() { "ARYA", "LOVED", "TO", "TAKE", "LONG", "WALKS", "IN", "THE", "PARK." },
             ["2"] = new List<string>() { "KHOSRO", "IS", "CHANGING", "ROOMS" },
@@ -21,24 +21,24 @@ public class QueryHandlerTest
     }
 
     [Fact]
-    public void HandleQuery_Should_GetSet()
+    public void HandleQueryTest_ShouldReturnCorrectIntersectionOfFiles_WhenGivenAQueryWithDifferentWordTypes()
     {
         // Arrange
-        var engine = new Mock<ISearchEngine>();
-        engine.Setup(x => x.DocIdToContents).Returns(_docIdSet);
-        engine.Setup(x => x.SearchForWord("ARYA")).Returns(new HashSet<string>()
+        var engineMock = new Mock<ISearchEngine>();
+        engineMock.Setup(x => x.DocIdToContents).Returns(_docIdSet);
+        engineMock.Setup(x => x.SearchForWord("ARYA")).Returns(new HashSet<string>()
         {
             "1", "2", "3", "4"
         });
-        engine.Setup(x => x.SearchForWord("KHOSRO")).Returns(new HashSet<string>()
+        engineMock.Setup(x => x.SearchForWord("KHOSRO")).Returns(new HashSet<string>()
         {
             "3"
         });
-        engine.Setup(x => x.SearchForWord("ZIA")).Returns(new HashSet<string>()
+        engineMock.Setup(x => x.SearchForWord("ZIA")).Returns(new HashSet<string>()
         {
             "2", "40"
         });
-        engine.Setup(x => x.SearchForWord("REZA")).Returns(new HashSet<string>()
+        engineMock.Setup(x => x.SearchForWord("REZA")).Returns(new HashSet<string>()
         {
             "120"
         });
@@ -57,7 +57,7 @@ public class QueryHandlerTest
             "REZA"
         };
 
-        var handler = new QueryHandler(engine.Object);
+        var handler = new QueryHandler(engineMock.Object);
         var expected = new HashSet<string>()
         {
             "2"
