@@ -43,12 +43,11 @@ public class InvertedIndex
         }
     }
 
-    private HashSet<string> HandleQuery(SearchEngine engine, string query)
+    private HashSet<string> HandleQuery(ISearchEngine engine, string query)
     {
         var handler = new QueryHandler(engine);
         var queryTokenizer = new Tokenizer(TokenizerMode.Query);
-        var @out = handler.HandleQuery(_queryBuilder.BuildQuery(queryTokenizer.Tokenize(query)));
-        return @out;
+        return handler.HandleQuery(_queryBuilder.BuildQuery(queryTokenizer.Tokenize(query)));
     }
     
 }

@@ -6,18 +6,17 @@ namespace InvertedIndex.Test;
 
 public class QueryHandlerTest
 {
-
-    private readonly Dictionary<string,List<string>> _docIdSet;
+    private readonly Dictionary<string, List<string>> _docIdSet;
 
     public QueryHandlerTest()
     {
-        _docIdSet = new Dictionary<string, List<string>>()
+        _docIdSet = new()
         {
-            ["1"] = new List<string>(){"ARYA","LOVED","TO","TAKE","LONG","WALKS","IN","THE","PARK."},
-            ["2"] = new List<string>(){"KHOSRO", "IS", "CHANGING","ROOMS"},
-            ["3"] = new List<string>(){"REZA", "LOVES","MOCKING."},
-            ["4"] = new List<string>(){"BOZORGMEHR", "PLEASE","APPROVE","THIS", "PULL", "REQUEST"},
-            ["5"] = new List<string>(){"ONE", "LAST","ONE","FOR","THE","HOMEBOYS"}
+            ["1"] = new List<string>() { "ARYA", "LOVED", "TO", "TAKE", "LONG", "WALKS", "IN", "THE", "PARK." },
+            ["2"] = new List<string>() { "KHOSRO", "IS", "CHANGING", "ROOMS" },
+            ["3"] = new List<string>() { "REZA", "LOVES", "MOCKING." },
+            ["4"] = new List<string>() { "BOZORGMEHR", "PLEASE", "APPROVE", "THIS", "PULL", "REQUEST" },
+            ["5"] = new List<string>() { "ONE", "LAST", "ONE", "FOR", "THE", "HOMEBOYS" }
         };
     }
 
@@ -57,7 +56,7 @@ public class QueryHandlerTest
             "ZIA",
             "REZA"
         };
-        
+
         var handler = new QueryHandler(engine.Object);
         var expected = new HashSet<string>()
         {
