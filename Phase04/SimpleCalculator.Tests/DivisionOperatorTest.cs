@@ -26,7 +26,6 @@ public class DivisionOperatorTest
         // Assert
         actual.Should().Be(expected);
     }
-
     [Theory]
     [InlineData(1, 0)]
     public void DivisionByZeroTest(int firstOperand, int secondOperand)

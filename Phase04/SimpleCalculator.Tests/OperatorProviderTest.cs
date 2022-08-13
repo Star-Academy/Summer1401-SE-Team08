@@ -23,7 +23,6 @@ public class OperatorProviderTest
         // Assert
         actual.Should().BeOfType<DivisionOperator>();
     }
-
     [Theory]
     [InlineData(OperatorEnum.Multiply)]
     public void OperatorProviderTest_ShouldReturnMultiplicationOperator_WhenGivenMultiplyEnum(OperatorEnum @enum)

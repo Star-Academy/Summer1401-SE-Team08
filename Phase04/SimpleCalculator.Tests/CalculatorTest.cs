@@ -23,6 +23,18 @@ public class CalculatorTester
         // Act 
         var calculator = new Calculator(provider);
         var actual = calculator.Calculate(firstParam, secondParam, OperatorEnum.Sum);
+    [Fact]
+    public void CalculatorAdditionTest()
+    {
+        // Arrange
+        var sumOperator = Substitute.For<IOperator>();
+        sumOperator.Calculate(1, 23).Returns(24);
+        var provider = Substitute.For<IOperatorProvider>();
+        provider.GetOperator(OperatorEnum.Sum).Returns(sumOperator);
+        const int expected = 24;
+        // Act 
+        var calculator = new Calculator(provider);
+        var actual = calculator.Calculate(1, 23, OperatorEnum.Sum);
         // Assert
         actual.Should().Be(expected);
     }
@@ -41,6 +53,16 @@ public class CalculatorTester
         // Act 
         var calculator = new Calculator(provider);
         var actual = calculator.Calculate(firstParam, secondParam, OperatorEnum.Sub);
+    public void CalculatorSubTest() {
+        // Arrange
+        var subOperator = Substitute.For<IOperator>();
+        subOperator.Calculate(30, 2).Returns(28);
+        var provider = Substitute.For<IOperatorProvider>();
+        provider.GetOperator(OperatorEnum.Sub).Returns(subOperator);
+        const int expected = 28;
+        // Act 
+        var calculator = new Calculator(provider);
+        var actual = calculator.Calculate(30, 2, OperatorEnum.Sub);
         // Assert
         actual.Should().Be(expected);
     }
