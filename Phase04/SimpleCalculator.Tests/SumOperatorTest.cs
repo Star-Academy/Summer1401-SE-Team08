@@ -8,16 +8,18 @@ namespace Phase04.SimpleCalculator.Tests;
 public class SumOperatorTest
 {
     private readonly SumOperator _sumOperator;
-    public SumOperatorTest() {
-        // Arrange
+
+    public SumOperatorTest()
+    {
         _sumOperator = new SumOperator();
     }
-    
+
     [Theory]
-    [InlineData(0,1,1)]
-    [InlineData(2,0,2)]
-    [InlineData(-3,0,-3)]
-    public void AdditionBaseTest(int firstOperand, int secondOperand, int expected)
+    [InlineData(0, 1, 1)]
+    [InlineData(2, 0, 2)]
+    [InlineData(-3, 0, -3)]
+    public void SumOperatorTest_ShouldReturnSumOfTwoNumbers_WhenGivenTheTwoNumbers(int firstOperand, int secondOperand,
+        int expected)
     {
         // Act
         var actual = _sumOperator.Calculate(firstOperand, secondOperand);
