@@ -8,10 +8,11 @@ public class InvertedIndexTest
     private Index Index;
 
     [Fact]
-    public void HandleQuery_Should_ProduceResult()
+    public void HandleQueryTest_ShouldReturnRelatedDocuments_WhenANewQueryComes()
     {
-        var builder = new Mock<IQueryBuilder>();
-        builder.Setup(x => x.BuildQuery(new List<string>()
+        // Arrange
+        var builderMock = new Mock<IQueryBuilder>();
+        builderMock.Setup(x => x.BuildQuery(new List<string>()
         {
             "ARYA",
             "KHOSRO"
@@ -22,22 +23,23 @@ public class InvertedIndexTest
             "ARYA",
             "KHOSRO"
         });
-        var handler = new Mock<IHandler>();
-        handler.Setup(x => x.HandleQuery(new Query())).Returns(new HashSet<string>()
+        var handlerMock = new Mock<IHandler>();
+        handlerMock.Setup(x => x.HandleQuery(new Query())).Returns(new HashSet<string>()
         {
             "12", "13", "15"
         });
 
         Index = new Index(null);
-        Index.QueryBuilder = builder.Object;
+        Index.QueryBuilder = builderMock.Object;
         Index.Tokenizer = tokenizer.Object;
-        Index.QueryHandler = handler.Object;
-
-        var actual = Index.HandleQuery("test");
+        Index.QueryHandler = handlerMock.Object;
         var expected = new HashSet<string>()
         {
             "12", "13", "15"
         };
+        // Act
+        var actual = Index.HandleQuery("test");
+        // Assert
         actual.Should().Equal(expected);
     }
 }

@@ -1,16 +1,20 @@
-﻿using InvertedIndex.Enums;
+﻿using FluentAssertions;
+using InvertedIndex.Enums;
 
 namespace InvertedIndex.Test;
 
-public class TokenTypeTester
+public class TokenTypeTest
 {
+    // Arrange
     [Theory]
-    [InlineData("+test",TokenType.Or)]
-    [InlineData("-test",TokenType.Not)]
+    [InlineData("+test", TokenType.Or)]
+    [InlineData("-test", TokenType.Not)]
     [InlineData("test", TokenType.And)]
-    public void String_Matches_Token(string query, TokenType expected)
+    public void TokenTypeTest_ShouldReturnMatchingToken_WhenGivenAString(string query, TokenType expected)
     {
+        // Act
         var actual = query.GetTokenType();
-        Assert.Equal(expected, actual);
+        // Assert
+        actual.Should().Be(expected);
     }
 }

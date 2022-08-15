@@ -38,7 +38,7 @@ public class QueryHandler : IHandler
 
     private HashSet<string> GetIntersectionSet(List<string> words, HashSet<string> universalSet)
     {
-        HashSet<string> set = new HashSet<string>(universalSet);
+        var set = new HashSet<string>(universalSet);
         foreach (string word in words)
         {
             set.IntersectWith(_engine.SearchForWord(word));

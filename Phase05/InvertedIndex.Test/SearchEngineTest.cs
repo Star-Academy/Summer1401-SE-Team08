@@ -3,7 +3,8 @@
 namespace InvertedIndex.Test;
 
 using FluentAssertions;
-public class SearchEngineTester
+
+public class SearchEngineTest
 {
     private readonly ISearchEngine _searchEngine;
 
@@ -37,22 +38,27 @@ public class SearchEngineTester
     };
 
 
-
-    public SearchEngineTester()
+    public SearchEngineTest()
     {
         _searchEngine = new SearchEngine();
         _searchEngine.AddToSearchEngine(_docs);
     }
 
-   [Fact]
-   public void Search_SingleWord_Files()
+    [Fact]
+    public void SearchEngineTest_ShouldReturnFilesContainingAWord_WhenUserSearchesForThatWord()
     {
+        // Arrange
         var expected = new HashSet<string> { "1.txt", "2.txt" };
+        // Act
         var actual = _searchEngine.SearchForWord("ARYA");
-        Assert.Equal(actual, expected);
+        // Assert
+        actual.Should().Equal(expected);
 
+        // Arrange
         expected = new HashSet<string>() { "2.txt", "3.txt" };
+        // Act
         actual = _searchEngine.SearchForWord("KHOSRO");
-        Assert.Equal(actual, expected);
+        // Assert
+        actual.Should().Equal(expected);
     }
 }
