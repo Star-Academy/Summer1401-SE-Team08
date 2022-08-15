@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <PackageId>StarAcaemy.CodeStar1401.Team08.InvertedIndex</PackageId>
+    <PackageId>StarAcaemy.CodeStar1401.Team08.SearchEngine</PackageId>
     <Authors>Arya Jalali &amp; Khosro Moeini</Authors>
     <ImplicitUsings>enable</ImplicitUsings>
     <Company>Star Academy</Company>

@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using InvertedIndex.Abstraction;
+﻿using InvertedIndex.Abstraction;
 
 namespace InvertedIndex.Test;
 
@@ -44,17 +43,22 @@ public class SearchEngineTest
         _searchEngine = new SearchEngine();
         _searchEngine.AddToSearchEngine(_docs);
     }
-    
-    // Arrange
-    [Theory]
-    [InlineData(new string[] {"1.txt","2.txt"},"ARYA")]
-    [InlineData(new string[] {"2.txt","3.txt"},"KHOSRO")]
 
-    public void SearchEngineTest_ShouldReturnFilesContainingAWord_WhenUserSearchesForThatWord(string[] expected, string searchingWord)
+    [Fact]
+    public void SearchEngineTest_ShouldReturnFilesContainingAWord_WhenUserSearchesForThatWord()
     {
+        // Arrange
+        var expected = new HashSet<string> { "1.txt", "2.txt" };
         // Act
-        var actual = _searchEngine.SearchForWord(searchingWord);
+        var actual = _searchEngine.SearchForWord("ARYA");
         // Assert
-        actual.Should().Equal(new HashSet<string>(expected));
+        actual.Should().Equal(expected);
+
+        // Arrange
+        expected = new HashSet<string>() { "2.txt", "3.txt" };
+        // Act
+        actual = _searchEngine.SearchForWord("KHOSRO");
+        // Assert
+        actual.Should().Equal(expected);
     }
 }

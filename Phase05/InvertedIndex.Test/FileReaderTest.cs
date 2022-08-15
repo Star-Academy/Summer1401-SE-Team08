@@ -1,4 +1,4 @@
-﻿using InvertedIndex.Abstraction;
+using InvertedIndex.Abstraction;
 
 namespace InvertedIndex.Test;
 

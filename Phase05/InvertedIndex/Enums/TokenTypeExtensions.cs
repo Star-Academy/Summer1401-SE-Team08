@@ -1,4 +1,4 @@
-﻿namespace InvertedIndex.Enums;
+namespace InvertedIndex.Enums;
 
 public static class TokenTypeExtensions
 {
