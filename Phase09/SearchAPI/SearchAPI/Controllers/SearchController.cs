@@ -2,12 +2,14 @@
 
 namespace SearchAPI.Controllers;
 
-
 [ApiController]
 [Route("[controller]")]
 public class SearchController
 {
-    private const string Path = @"C:\Users\Arya\OneDrive\Desktop\EnglishData";
+    private static string Path = System.IO.Path.Combine(Directory.GetParent(Directory
+        .GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName)
+        .FullName).FullName, "Phase05/EnglishData");
+
     private static readonly InvertedIndex.InvertedIndex SearchEngine = new(Path);
 
     [HttpGet]
