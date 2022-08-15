@@ -6,11 +6,11 @@ namespace SearchAPI.Controllers;
 [Route("[controller]")]
 public class SearchController
 {
-    private static string Path = System.IO.Path.Combine(Directory.GetParent(Directory
+    private static string DataPath = Path.Combine(Directory.GetParent(Directory
         .GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName)
         .FullName).FullName, "Phase05/EnglishData");
 
-    private static readonly InvertedIndex.InvertedIndex SearchEngine = new(Path);
+    private static readonly InvertedIndex.InvertedIndex SearchEngine = new(DataPath);
 
     [HttpGet]
     public HashSet<string>? Search([FromQuery(Name = "Query")] string query)
