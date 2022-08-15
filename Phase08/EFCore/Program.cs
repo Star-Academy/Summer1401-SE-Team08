@@ -12,7 +12,7 @@ public class Program
 
     public static void Main(string[] args)
     {
-        using var database = new StudentDatabase();
+        using var database = new StudentDbContext();
         List<Student> students;
         List<Grade> grades;
         try
@@ -34,9 +34,9 @@ public class Program
         Console.WriteLine(string.Join('\n', topStudents));
     }
 
-    private static IEnumerable<string> GetTopStudents(StudentDatabase database, int numberOfTopStudents)
+    private static IEnumerable<string> GetTopStudents(StudentDbContext database, int numberOfTopStudents)
     {
-        var topStudents = database.Students.Select(s => new
+        return topStudents = database.Students.Select(s => new
             {
                 Average = database.Grades.Where(g => s.StudentNumber == g.StudentNumber)
                     .Select(g => g.Score)
@@ -47,6 +47,5 @@ public class Program
             .Select(t =>
                 $"FirstName: {t.Student.FirstName}, LastName: {t.Student.LastName}, Average: {t.Average}")
             .ToList();
-        return topStudents;
     }
 }

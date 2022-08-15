@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Entity;
 
-public class StudentDatabase : DbContext
+public class StudentDbContext : DbContext
 {
     public DbSet<Student> Students { get; set; }
     public DbSet<Grade> Grades { get; set; }
